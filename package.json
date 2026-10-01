@@ -1,0 +1,12 @@
+{
+  "name": "jasper-ui",
+  "private": true,
+  "type": "module",
+  "description": "Eigen shadcn-register met componenten voor meerdere projecten",
+  "scripts": {
+    "build": "shadcn build --output docs/r"
+  },
+  "devDependencies": {
+    "shadcn": "^4.21.1"
+  }
+}
