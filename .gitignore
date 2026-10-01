@@ -1,2 +1,15 @@
 node_modules/
 .DS_Store
+
+# Alleen lokaal, nooit in git of in de Pages-build: de proeftuin (21st.dev verbiedt herdistributie) en
+# huisstijlen die niet openbaar zijn (inklaretaal).
+proeftuin/
+themes/lokaal/
+
+# Werkbestanden van Storybook, Vitest en Playwright
+storybook-static/
+debug-storybook.log
+__screenshots__/
+.vitest-attachments/
+.playwright-mcp/
+*.tsbuildinfo

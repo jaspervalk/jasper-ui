@@ -2,11 +2,50 @@
   "name": "jasper-ui",
   "private": true,
   "type": "module",
-  "description": "Eigen shadcn-register met componenten voor meerdere projecten",
+  "description": "Eigen shadcn-register met componenten voor meerdere projecten, en een werkbank (Storybook) om UI te bekijken en te testen",
   "scripts": {
-    "build": "shadcn build --output docs/r"
+    "dev": "storybook dev -p 6006",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "build": "shadcn build --output docs/r && WERKBANK_PUBLIEK=1 storybook build -o docs/storybook && node scripts/controleer-build.mjs"
+  },
+  "dependencies": {
+    "@number-flow/react": "^0.6.2",
+    "@visx/curve": "^4.0.1-alpha.0",
+    "@visx/event": "^4.0.1-alpha.0",
+    "@visx/grid": "^4.0.1-alpha.0",
+    "@visx/responsive": "^4.0.1-alpha.0",
+    "@visx/scale": "^4.0.1-alpha.0",
+    "@visx/shape": "^4.0.1-alpha.0",
+    "clsx": "^2.1.1",
+    "d3-array": "^3.2.4",
+    "d3-shape": "^3.2.0",
+    "motion": "^13.5.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
-    "shadcn": "^4.21.1"
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@storybook/addon-a11y": "^10.6.1",
+    "@storybook/addon-docs": "^10.6.1",
+    "@storybook/addon-mcp": "^10.6.1",
+    "@storybook/addon-themes": "^10.6.1",
+    "@storybook/addon-vitest": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^22.20.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitest/browser": "^5.0.3",
+    "@vitest/browser-playwright": "^5.0.3",
+    "playwright": "^1.63.0",
+    "shadcn": "^4.21.1",
+    "storybook": "^10.6.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
   }
 }

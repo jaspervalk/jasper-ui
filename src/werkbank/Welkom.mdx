@@ -1,0 +1,24 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Welkom" />
+
+# Werkbank
+
+Hier bekijk en test je de UI van jasper-ui: de onderdelen van het register en de experimenten uit het lab. Alles wat je
+hier ziet, staat als code in de repo [jaspervalk/jasper-ui](https://github.com/jaspervalk/jasper-ui).
+
+## Wat staat waar
+
+- **Catalogus**: elk onderdeel van het register `@jasper`, zoals een project het installeert.
+- **Lab**: hele pagina's in twee of drie richtingen, met de prompt erbij. De story _Vergelijk_ zet ze naast elkaar.
+  De data is verzonnen.
+
+## Bekijken
+
+Bovenin kies je de **huisstijl** (neutraal, de standaard van shadcn, of cockpit), **licht of donker**, en de
+**breedte**: mobiel (375), tablet (768) of desktop (1440). Onder een story staat bij **Accessibility** wat axe vindt,
+ook over contrast.
+
+## Testen
+
+`npm test` toetst elke story in elke huisstijl, licht en donker, in Chromium. Een overtreding van axe telt als fout.

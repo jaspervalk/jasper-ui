@@ -1,0 +1,85 @@
+/* Cockpit van het beleggingsregister, vertaald naar de tokennamen van shadcn. Bron: invest_helper/web/src/index.css.
+   bg → background, panel → card, panel-2 → muted en secondary, text → foreground, muted → muted-foreground,
+   accent (petrol) → primary, accent-soft → accent en primary-soft, err → destructive, pos/neg/warn → positive/
+   negative/warning. Inter voor tekst, JetBrains Mono voor cijfers. */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+:root[data-huisstijl="cockpit"] {
+  color-scheme: light;
+  --radius: 0.5rem;
+  --background: #f3f6fa;
+  --foreground: #1b2026;
+  --card: #ffffff;
+  --card-foreground: #1b2026;
+  --popover: #ffffff;
+  --popover-foreground: #1b2026;
+  --primary: #046c7f;
+  --primary-foreground: #ffffff;
+  --secondary: #ebf0f5;
+  --secondary-foreground: #1b2026;
+  --muted: #ebf0f5;
+  --muted-foreground: #5c646f;
+  --accent: #eaf7f9;
+  --accent-foreground: #1b2026;
+  --destructive: #b23227;
+  --border: #dae0e8;
+  --input: #dae0e8;
+  --ring: #046c7f;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1b2026;
+  --sidebar-primary: #046c7f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ebf0f5;
+  --sidebar-accent-foreground: #1b2026;
+  --sidebar-border: #dae0e8;
+  --sidebar-ring: #046c7f;
+
+  --positive: #40704e;
+  --negative: #994b47;
+  --warning: #8d5503;
+  --primary-soft: #eaf7f9;
+  --warning-soft: #faf3e8;
+  --destructive-soft: #fdf0ef;
+
+  --font-tekst: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-cijfers: "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-kop: var(--font-tekst);
+}
+
+:root[data-huisstijl="cockpit"].dark {
+  color-scheme: dark;
+  --background: #0b0f14;
+  --foreground: #e4e8ed;
+  --card: #13181e;
+  --card-foreground: #e4e8ed;
+  --popover: #13181e;
+  --popover-foreground: #e4e8ed;
+  --primary: #5eb3c2;
+  --primary-foreground: #0b0f14;
+  --secondary: #1b2128;
+  --secondary-foreground: #e4e8ed;
+  --muted: #1b2128;
+  --muted-foreground: #9ca5b1;
+  --accent: #122529;
+  --accent-foreground: #e4e8ed;
+  --destructive: #ee6a5a;
+  --border: #2a3139;
+  --input: #2a3139;
+  --ring: #5eb3c2;
+  --sidebar: #13181e;
+  --sidebar-foreground: #e4e8ed;
+  --sidebar-primary: #5eb3c2;
+  --sidebar-primary-foreground: #0b0f14;
+  --sidebar-accent: #1b2128;
+  --sidebar-accent-foreground: #e4e8ed;
+  --sidebar-border: #2a3139;
+  --sidebar-ring: #5eb3c2;
+
+  --positive: #91c99f;
+  --negative: #e19592;
+  --warning: #e0a64e;
+  --primary-soft: #122529;
+  --warning-soft: #272117;
+  --destructive-soft: #2a1c1c;
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jasper-ui</title>
+    <meta name="description" content="Eigen shadcn-register en werkbank voor UI, gedeeld tussen projecten." />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --achtergrond: #f6f7f9;
+        --vlak: #ffffff;
+        --tekst: #16191d;
+        --gedempt: #5b626c;
+        --rand: #dde1e6;
+        --accent: #046c7f;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --achtergrond: #0c0f13;
+          --vlak: #14181d;
+          --tekst: #e4e8ed;
+          --gedempt: #9ca5b1;
+          --rand: #2a3139;
+          --accent: #5eb3c2;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--achtergrond);
+        color: var(--tekst);
+        font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      main { max-width: 44rem; margin: 0 auto; padding: 4rem 1rem 5rem; }
+      h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
+      h2 { font-size: 1rem; margin: 2.75rem 0 0.75rem; }
+      p { margin: 0 0 0.75rem; }
+      .lead { color: var(--gedempt); margin-bottom: 2rem; }
+      a { color: var(--accent); text-underline-offset: 0.2em; }
+      a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+      .knop {
+        display: inline-block;
+        padding: 0.625rem 1rem;
+        border-radius: 0.5rem;
+        background: var(--accent);
+        color: var(--vlak);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      pre {
+        margin: 0 0 1rem;
+        padding: 0.875rem 1rem;
+        overflow-x: auto;
+        background: var(--vlak);
+        border: 1px solid var(--rand);
+        border-radius: 0.5rem;
+        font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+      th, td { text-align: left; vertical-align: top; padding: 0.625rem 0.75rem 0.625rem 0; border-bottom: 1px solid var(--rand); }
+      th { color: var(--gedempt); font-weight: 500; }
+      td:first-child { white-space: nowrap; }
+      footer { margin-top: 3rem; color: var(--gedempt); font-size: 0.875rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>jasper-ui</h1>
+      <p class="lead">Eigen shadcn-register en werkbank voor UI, gedeeld tussen projecten.</p>
+
+      <p><a class="knop" href="storybook/">Open de werkbank</a></p>
+      <p>
+        De werkbank is een Storybook met de catalogus van het register en het lab, waarin hele pagina's in verschillende
+        richtingen naast elkaar staan. Wissel in de werkbalk van huisstijl, van licht naar donker, en van desktop naar
+        mobiel.
+      </p>
+
+      <h2>Het register gebruiken</h2>
+      <p>Zet het register in de <code>components.json</code> van een project met Tailwind 4:</p>
+      <pre>"registries": {
+  "@jasper": "https://jaspervalk.github.io/jasper-ui/r/{name}.json"
+}</pre>
+      <p>Voeg daarna een onderdeel toe:</p>
+      <pre>npx shadcn@latest add @jasper/chart-thema</pre>
+
+      <h2>Wat erin zit</h2>
+      <table>
+        <thead>
+          <tr><th scope="col">Naam</th><th scope="col">Soort</th><th scope="col">Wat</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>chart-thema</code></td>
+            <td>thema</td>
+            <td>De kleuren van de Bklit-grafieken, licht en donker, met een kloppende koppeling naar Tailwind 4.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <footer>
+        <a href="r/registry.json">registry.json</a> ·
+        <a href="https://github.com/jaspervalk/jasper-ui">Broncode op GitHub</a> · MIT
+      </footer>
+    </main>
+  </body>
+</html>

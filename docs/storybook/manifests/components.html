@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Components Manifest</title>
+  <style>
+      :root {
+          --bg: #0b0c10;
+          --panel: #121318;
+          --muted: #9aa0a6;
+          --fg: #e8eaed;
+          --ok: #22c55e;
+          --info: #1e88e5;
+          --err: #c62828;
+          --ok-bg: #0c1a13;
+          --info-bg: #0c1624;
+          --err-bg: #1a0e0e;
+          --chip: #1f2330;
+          --border: #2b2f3a;
+          --link: #8ab4f8;
+          --active-ring: 1px; /* 1px active ring for pills and toggles */
+      }
+
+      * {
+          box-sizing: border-box;
+      }
+
+      html,
+      body {
+          margin: 0;
+          background: var(--bg);
+          color: var(--fg);
+          font: 14px/1.5 system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Ubuntu,
+          Cantarell,
+          'Helvetica Neue',
+          Arial,
+          'Noto Sans';
+      }
+
+      .wrap {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px 20px;
+      }
+
+      header {
+          position: sticky;
+          top: 0;
+          backdrop-filter: blur(6px);
+          background: color-mix(in srgb, var(--bg) 84%, transparent);
+          border-bottom: 1px solid var(--border);
+          z-index: 10;
+      }
+
+      h1 {
+          font-size: 20px;
+          margin: 0 0 6px;
+      }
+
+      .summary {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          align-items: center;
+      }
+
+      /* Top filter pills */
+      .filter-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          background: var(--panel);
+          text-decoration: none;
+          cursor: pointer;
+          user-select: none;
+          color: var(--fg);
+      }
+
+      .filter-pill.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: color-mix(in srgb, var(--ok) 18%, #000);
+      }
+
+      .filter-pill.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+      }
+
+      .filter-pill.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+      }
+
+      .filter-pill.all {
+          color: #d7dbe0;
+          border-color: var(--border);
+          background: var(--panel);
+      }
+
+      .filter-pill[aria-disabled='true'] {
+          cursor: default;
+          text-decoration: none;
+      }
+
+      .filter-pill:focus,
+      .filter-pill:active {
+          outline: none;
+          box-shadow: none;
+      }
+
+      /* Selected top pill ring via :target */
+      #filter-all:target ~ header .filter-pill[data-k='all'],
+      #filter-errors:target ~ header .filter-pill[data-k='errors'],
+      #filter-infos:target ~ header .filter-pill[data-k='infos'],
+      #filter-story-errors:target ~ header .filter-pill[data-k='story-errors'],
+      #filter-story-warnings:target ~ header .filter-pill[data-k='story-warnings'],
+      #filter-no-api:target ~ header .filter-pill[data-k='no-api'],
+      #filter-doc-errors:target ~ header .filter-pill[data-k='docs'],
+      #filter-docs:target ~ header .filter-pill[data-k='docs'] {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Hidden targets for filtering */
+      #filter-all,
+      #filter-errors,
+      #filter-infos,
+      #filter-story-errors,
+      #filter-story-warnings,
+      #filter-no-api,
+      #filter-doc-errors,
+      #filter-docs {
+          display: none;
+      }
+
+      main {
+          padding: 36px 0 40px;
+      }
+
+      .grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+      }
+
+      /* one card per row */
+
+      .card {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          /* Keep a deep-linked card clear of the sticky header when scrolled into view */
+          scroll-margin-top: 110px;
+      }
+
+      /* Highlight the card deep-linked via components.html#<manifest-id> */
+      .card:target {
+          box-shadow: 0 0 0 2px var(--info);
+          border-color: var(--info);
+      }
+
+      .head {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+      }
+
+      .title h2 {
+          font-size: 16px;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .meta {
+          font-size: 12px;
+          color: var(--muted);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .kv {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+      }
+
+      .chip {
+          font-size: 12px;
+          padding: 4px 8px;
+          border-radius: 999px;
+          background: var(--chip);
+          border: 1px solid var(--border);
+      }
+
+      .hint {
+          color: var(--muted);
+          font-size: 12px;
+      }
+
+      .badges {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      /* Per-card badges: labels become toggles when clickable */
+      .badge {
+          font-size: 12px;
+          padding: 3px 8px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--chip);
+          color: #d7dbe0;
+      }
+
+      .badge.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+      }
+
+      .badge.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+      }
+
+      .badge.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .snippet-warning {
+          margin-top: 8px;
+          padding: 8px 10px;
+          border-radius: 8px;
+          border: 1px solid color-mix(in srgb, var(--info) 45%, var(--border));
+          background: var(--info-bg);
+          color: #b3d9ff;
+          font-size: 12px;
+      }
+
+      .as-toggle {
+          cursor: pointer;
+      }
+
+      /* 1px ring on active toggle */
+      .tg-err:checked + label.as-toggle,
+      .tg-info:checked + label.as-toggle,
+      .tg-stories:checked + label.as-toggle,
+      .tg-docs:checked + label.as-toggle,
+      .tg-subcomponents:checked + label.as-toggle,
+      .tg-content:checked + label.as-toggle,
+      .tg-props:checked + label.as-toggle {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Panels: hidden by default, shown when respective toggle checked */
+      .panels {
+          display: grid;
+          gap: 10px;
+      }
+
+      .panel {
+          display: none;
+      }
+
+      .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+
+      .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-props:checked ~ .panels .panel-props {
+          display: grid;
+      }
+
+      /* Colored notes for API error + info */
+      .note {
+          padding: 12px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+      }
+
+      .note.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+          color: #ffd1d4;
+      }
+
+      .note.info {
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+          color: #d6e8ff;
+      }
+
+      .note.ok {
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: var(--ok-bg);
+          color: var(--fg);
+      }
+
+      .note-title {
+          font-weight: 600;
+          margin-bottom: 6px;
+      }
+
+      .note-body {
+          white-space: normal;
+      }
+
+      /* Story error cards */
+      .ex {
+          padding: 10px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          background: #0f131b;
+      }
+
+      .ex.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      .status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          display: inline-block;
+      }
+
+      .dot-ok {
+          background: var(--ok);
+      }
+
+      .dot-err {
+          background: var(--err);
+      }
+
+      .ex-name {
+          font-weight: 600;
+      }
+
+      /* Error groups (visible in errors filter) */
+      .error-groups {
+          display: none;
+          margin-bottom: 16px;
+      }
+
+      .group {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          overflow: hidden;
+      }
+
+      .group + .group {
+          margin-top: 12px;
+      }
+
+      .group-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 14px;
+          cursor: pointer;
+          border-bottom: 1px solid var(--border);
+      }
+
+      .group-header:hover {
+          background: #141722;
+      }
+
+      .group-title {
+          font-weight: 600;
+          flex: 1;
+      }
+
+      .group-count {
+          font-size: 12px;
+          color: var(--muted);
+      }
+
+      .group-cards {
+          display: none;
+          padding: 12px;
+      }
+
+      .group .card {
+          margin: 12px 0;
+      }
+
+      .group .card:first-child {
+          margin-top: 0;
+      }
+
+      .group .card:last-child {
+          margin-bottom: 0;
+      }
+
+      /* caret rotation */
+      .group-tg:checked + label .caret {
+          transform: rotate(90deg);
+      }
+
+      .caret {
+          transition: transform 0.15s ease;
+      }
+
+      /* toggle body */
+      .group-tg:checked ~ .group-cards {
+          display: block;
+      }
+
+      /* CSS-only filtering of cards via top pills */
+      #filter-errors:target ~ main .card:not(.has-error):not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-infos:target ~ main .card:not(.has-info) {
+          display: none;
+      }
+
+      #filter-story-errors:target ~ main .card:not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-story-warnings:target ~ main .card:not(.has-story-warning) {
+          display: none;
+      }
+
+      #filter-no-api:target ~ main .card:not(.missing-api) {
+          display: none;
+      }
+
+      #filter-doc-errors:target ~ main .card:not(.has-doc-error) {
+          display: none;
+      }
+
+      #filter-docs:target ~ main .card:has(> .tg-docs),
+      #filter-docs:target ~ main .card.is-doc {
+          display: block;
+      }
+
+      #filter-docs:target ~ main .card:not(:has(> .tg-docs)):not(.is-doc) {
+          display: none;
+      }
+
+      #filter-all:target ~ main .card {
+          display: block;
+      }
+
+      /* In errors view, hide standalone component-error cards in the regular grid (they will appear in groups) */
+      #filter-errors:target ~ main .grid .card.has-error {
+          display: none;
+      }
+
+      /* Show grouped section only in errors view */
+      #filter-errors:target ~ main .error-groups {
+          display: block;
+      }
+
+      /* Section titles */
+      .section-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--muted);
+          margin: 24px 0 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid var(--border);
+      }
+      .section-title:first-child {
+          margin-top: 0;
+      }
+
+      /* When a toggle is checked, show the corresponding panel */
+      .card > .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+      
+      .card > .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+      }
+      
+      .card > .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+      }
+
+      .card > .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+      }
+
+      .card > .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+      }
+
+      .card > .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+      }
+
+      /* Add vertical spacing around panels only when any panel is visible */
+      .card > .tg-err:checked ~ .panels,
+      .card > .tg-info:checked ~ .panels,
+      .card > .tg-stories:checked ~ .panels,
+      .card > .tg-docs:checked ~ .panels,
+      .card > .tg-subcomponents:checked ~ .panels,
+      .card > .tg-content:checked ~ .panels,
+      .card > .tg-props:checked ~ .panels {
+          margin: 10px 0;
+      }
+
+      /* Optional: a subtle 1px ring on the active badge, using :has() if available */
+      @supports selector(.card:has(.tg-err:checked)) {
+          .card:has(.tg-err:checked) label[for$='-err'],
+          .card:has(.tg-info:checked) label[for$='-info'],
+          .card:has(.tg-stories:checked) label[for$='-stories'],
+          .card:has(.tg-docs:checked) label[for$='-docs'],
+          .card:has(.tg-subcomponents:checked) label[for$='-subcomponents'],
+          .card:has(.tg-content:checked) label[for$='-content'],
+          .card:has(.tg-props:checked) label[for$='-props'] {
+              box-shadow: 0 0 0 1px currentColor;
+              border-color: currentColor;
+          }
+      }
+
+      /* Wrap long lines in code blocks at ~120 characters */
+      pre, code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      pre {
+          white-space: pre-wrap;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          overflow-x: auto; /* fallback for extremely long tokens */
+          margin: 8px 0 0;
+      }
+      pre > code {
+          display: block;
+          white-space: inherit;
+          overflow-wrap: inherit;
+          word-break: inherit;
+          inline-size: min(100%, 120ch);
+      }
+
+      /* MDX content container for docs */
+      .mdx-content {
+          background: #0f131b;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 12px;
+          max-height: 400px;
+          overflow-y: auto;
+          margin-top: 8px;
+      }
+  </style>
+</head>
+<body>
+<!-- Hidden targets for the top-level filters -->
+<span id="filter-all"></span>
+<span id="filter-errors"></span>
+<span id="filter-infos"></span>
+<span id="filter-story-errors"></span>
+<span id="filter-story-warnings"></span>
+<span id="filter-no-api"></span>
+<span id="filter-doc-errors"></span>
+<span id="filter-docs"></span>
+<header>
+  <div class="wrap">
+    <h1>Manifest Debugger</h1>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/2 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">2/2 infos</a><span class="filter-pill ok" aria-disabled="true">6 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="note info" style="margin-bottom: 16px;">
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.4s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <pre><code>typescript: {
+  reactDocgen: 'react-docgen-typescript',
+}</code></pre>
+            Note: <code>react-docgen-typescript</code> can be slower. If performance is acceptable for your project, it generally produces better results.
+            <a href="https://storybook.js.org/docs/api/main-config/main-config-typescript#reactdocgen" target="_blank">Learn more</a>
+          </div>
+    <h2 class="section-title">Components</h2>
+    <div class="grid" role="list">
+      
+<article
+  id="lab-2026-10-01-portefeuille-dashboard"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="2026-10-01Portefeuille-dashboard">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> 2026-10-01Portefeuille-dashboard</h2>
+      <div class="badges">
+        <label for="c-0-lab-2026-10-01-portefeuille-dashboard-err" class="badge err as-toggle">API error</label>
+        <label for="c-0-lab-2026-10-01-portefeuille-dashboard-info" class="badge info as-toggle">1 info</label>
+        <label for="c-0-lab-2026-10-01-portefeuille-dashboard-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx">lab-2026-10-01-portefeuille-dashboard · ./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-0-lab-2026-10-01-portefeuille-dashboard-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-0-lab-2026-10-01-portefeuille-dashboard-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-0-lab-2026-10-01-portefeuille-dashboard-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   7 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+   8 |
+&gt;  9 | const meta = {
+     | ^
+  10 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  11 |   parameters: {
+  12 |     layout: &quot;fullscreen&quot;,
+
+./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { Vergelijk as VergelijkVarianten } from &quot;@/werkbank/Vergelijk&quot;;
+
+import { VariantCompact } from &quot;./VariantCompact&quot;;
+import { VariantRustig } from &quot;./VariantRustig&quot;;
+import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  parameters: {
+    layout: &quot;fullscreen&quot;,
+    docs: {
+      description: {
+        component:
+          &quot;Drie richtingen voor het dashboard van een persoonlijke beleggingsportefeuille. Prompt, bronnen en plan staan in `prompt.md`. Alle fondsen en bedragen zijn verzonnen.&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+type Story = StoryObj&lt;typeof meta&gt;;
+
+export const Rustig: Story = {
+  render: () =&gt; &lt;VariantRustig /&gt;,
+};
+
+export const Uitgesproken: Story = {
+  render: () =&gt; &lt;VariantUitgesproken /&gt;,
+};
+
+export const Compact: Story = {
+  render: () =&gt; &lt;VariantCompact /&gt;,
+};
+
+export const Vergelijk: Story = {
+  parameters: {
+    // Drie volledige pagina&#39;s naast elkaar: elke pagina heeft een eigen &lt;main&gt; en dezelfde secties, en elke pagina
+    // staat in een &lt;section aria-label&gt; van Vergelijk. Alleen de regels over dubbele en geneste landmarks staan uit;
+    // de losse stories hierboven toetsen ze wel.
+    a11y: {
+      config: {
+        rules: [
+          { id: &quot;landmark-no-duplicate-main&quot;, enabled: false },
+          { id: &quot;landmark-main-is-top-level&quot;, enabled: false },
+          { id: &quot;landmark-unique&quot;, enabled: false },
+        ],
+      },
+    },
+  },
+  render: () =&gt; (
+    &lt;VergelijkVarianten
+      varianten={[
+        {
+          naam: &quot;Rustig&quot;,
+          richting: &quot;Eén groot kerncijfer, veel lucht en één accent.&quot;,
+          element: &lt;VariantRustig /&gt;,
+        },
+        {
+          naam: &quot;Uitgesproken&quot;,
+          richting: &quot;Het accent draagt de bovenkant; elke sectie opent met een zin.&quot;,
+          element: &lt;VariantUitgesproken /&gt;,
+        },
+        {
+          naam: &quot;Compact&quot;,
+          richting: &quot;Alles op één scherm: dichte tabel, sorteren en filteren.&quot;,
+          element: &lt;VariantCompact /&gt;,
+        },
+      ]}
+    /&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import {
+  VariantCompact,
+  VariantRustig,
+  VariantUitgesproken,
+  Vergelijk as VergelijkVarianten,
+} from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Rustig</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Rustig = () =&gt; &lt;VariantRustig /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Uitgesproken</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Uitgesproken = () =&gt; &lt;VariantUitgesproken /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Compact</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Compact = () =&gt; &lt;VariantCompact /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Vergelijk</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Vergelijk = () =&gt; (
+  &lt;VergelijkVarianten
+    varianten={[
+      {
+        naam: &quot;Rustig&quot;,
+        richting: &quot;Eén groot kerncijfer, veel lucht en één accent.&quot;,
+        element: &lt;VariantRustig /&gt;,
+      },
+      {
+        naam: &quot;Uitgesproken&quot;,
+        richting: &quot;Het accent draagt de bovenkant; elke sectie opent met een zin.&quot;,
+        element: &lt;VariantUitgesproken /&gt;,
+      },
+      {
+        naam: &quot;Compact&quot;,
+        richting: &quot;Alles op één scherm: dichte tabel, sorteren en filteren.&quot;,
+        element: &lt;VariantCompact /&gt;,
+      },
+    ]}
+  /&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="catalogus-chart-thema"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="chart-thema">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> chart-thema</h2>
+      <div class="badges">
+        <label for="c-1-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
+        <label for="c-1-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
+        <label for="c-1-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./catalogus/chart-thema.stories.tsx">catalogus-chart-thema · ./catalogus/chart-thema.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-1-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-1-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-1-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+  83 | ];
+  84 |
+&gt; 85 | const meta = {
+     | ^
+  86 |   title: &quot;Catalogus/chart-thema&quot;,
+  87 |   parameters: {
+  88 |     docs: {
+
+./catalogus/chart-thema.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+import { curveMonotoneX } from &quot;@visx/curve&quot;;
+
+import { Grid } from &quot;@/components/charts/grid&quot;;
+import { Line } from &quot;@/components/charts/line&quot;;
+import { LineChart } from &quot;@/components/charts/line-chart&quot;;
+import { ChartTooltip } from &quot;@/components/charts/tooltip&quot;;
+import { XAxis } from &quot;@/components/charts/x-axis&quot;;
+
+import registry from &quot;../registry.json&quot;;
+
+// De waarden komen rechtstreeks uit registry.json, zodat de catalogus altijd toont wat het register uitlevert.
+const item = registry.items.find((i) =&gt; i.name === &quot;chart-thema&quot;);
+if (!item) throw new Error(&quot;chart-thema ontbreekt in registry.json&quot;);
+const licht: Record&lt;string, string&gt; = item.cssVars.light;
+const donker: Record&lt;string, string&gt; = item.cssVars.dark;
+
+const groepen: { titel: string; namen: string[] }[] = [
+  { titel: &quot;Reeksen&quot;, namen: [&quot;chart-1&quot;, &quot;chart-2&quot;, &quot;chart-3&quot;, &quot;chart-4&quot;, &quot;chart-5&quot;] },
+  {
+    titel: &quot;Vlak, tekst en hulplijnen&quot;,
+    namen: [&quot;chart-background&quot;, &quot;chart-foreground&quot;, &quot;chart-foreground-muted&quot;, &quot;chart-label&quot;, &quot;chart-grid&quot;, &quot;chart-crosshair&quot;],
+  },
+  {
+    titel: &quot;Tooltip en markers&quot;,
+    namen: [
+      &quot;chart-tooltip-background&quot;,
+      &quot;chart-tooltip-foreground&quot;,
+      &quot;chart-tooltip-muted&quot;,
+      &quot;chart-marker-background&quot;,
+      &quot;chart-marker-border&quot;,
+      &quot;chart-marker-foreground&quot;,
+    ],
+  },
+  {
+    titel: &quot;Schaal (heatmap)&quot;,
+    namen: [&quot;chart-scale-01&quot;, &quot;chart-scale-02&quot;, &quot;chart-scale-03&quot;, &quot;chart-scale-04&quot;, &quot;chart-scale-05&quot;, &quot;chart-scale-pattern-color&quot;],
+  },
+];
+
+function Kleurstalen({ isDonker }: { isDonker: boolean }) {
+  return (
+    &lt;div className=&quot;grid max-w-4xl gap-8&quot;&gt;
+      {groepen.map((groep) =&gt; (
+        &lt;section key={groep.titel} className=&quot;grid gap-3&quot;&gt;
+          &lt;h2 className=&quot;text-sm font-semibold&quot;&gt;{groep.titel}&lt;/h2&gt;
+          &lt;ul className=&quot;grid grid-cols-2 gap-3 sm:grid-cols-3&quot;&gt;
+            {groep.namen.map((naam) =&gt; {
+              const eigen = isDonker ? donker[naam] : licht[naam];
+              return (
+                &lt;li key={naam} className=&quot;flex items-center gap-3 rounded-lg border bg-card p-2&quot;&gt;
+                  &lt;span
+                    aria-hidden
+                    className=&quot;size-10 shrink-0 rounded-md border&quot;
+                    style={{ background: `var(--${naam})` }}
+                  /&gt;
+                  &lt;span className=&quot;grid min-w-0 gap-0.5&quot;&gt;
+                    &lt;code className=&quot;truncate font-mono text-xs&quot;&gt;--{naam}&lt;/code&gt;
+                    &lt;span className=&quot;truncate font-mono text-xs text-muted-foreground&quot;&gt;
+                      {eigen ?? `${licht[naam]} (zelfde als licht)`}
+                    &lt;/span&gt;
+                  &lt;/span&gt;
+                &lt;/li&gt;
+              );
+            })}
+          &lt;/ul&gt;
+        &lt;/section&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// Verzonnen voorbeelddata: twee reeksen per maand, geen echte cijfers.
+const voorbeeld = [
+  { date: new Date(&quot;2026-01-01&quot;), a: 120, b: 90 },
+  { date: new Date(&quot;2026-02-01&quot;), a: 135, b: 96 },
+  { date: new Date(&quot;2026-03-01&quot;), a: 118, b: 104 },
+  { date: new Date(&quot;2026-04-01&quot;), a: 146, b: 101 },
+  { date: new Date(&quot;2026-05-01&quot;), a: 152, b: 117 },
+  { date: new Date(&quot;2026-06-01&quot;), a: 149, b: 125 },
+  { date: new Date(&quot;2026-07-01&quot;), a: 168, b: 121 },
+  { date: new Date(&quot;2026-08-01&quot;), a: 174, b: 133 },
+];
+
+const meta = {
+  title: &quot;Catalogus/chart-thema&quot;,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          &quot;De CSS-variabelen van de Bklit-grafieken, licht en donker. Toevoegen met `npx shadcn@latest add @jasper/chart-thema`. Kleurwaarden uit Bklit UI (MIT, © Matt Litherland).&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+type Story = StoryObj&lt;typeof meta&gt;;
+
+export const Kleuren: Story = {
+  render: (_, { globals }) =&gt; &lt;Kleurstalen isDonker={globals.theme === &quot;donker&quot;} /&gt;,
+};
+
+export const Grafiek: Story = {
+  render: () =&gt; (
+    &lt;figure className=&quot;grid max-w-3xl gap-3&quot;&gt;
+      &lt;figcaption className=&quot;text-sm text-muted-foreground&quot;&gt;
+        Bklit-lijngrafiek in deze kleuren. Voorbeelddata, verzonnen.
+      &lt;/figcaption&gt;
+      &lt;LineChart data={voorbeeld}&gt;
+        &lt;Grid horizontal /&gt;
+        &lt;Line dataKey=&quot;a&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-primary)&quot; /&gt;
+        &lt;Line dataKey=&quot;b&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-secondary)&quot; /&gt;
+        &lt;XAxis /&gt;
+        &lt;ChartTooltip /&gt;
+      &lt;/LineChart&gt;
+    &lt;/figure&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ChartTooltip, Grid, Line, LineChart, XAxis } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Kleuren</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Kleuren = (_, { globals }) =&gt; &lt;Kleurstalen isDonker={globals.theme === &quot;donker&quot;} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Grafiek</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Grafiek = () =&gt; (
+  &lt;figure className=&quot;grid max-w-3xl gap-3&quot;&gt;
+    &lt;figcaption className=&quot;text-sm text-muted-foreground&quot;&gt;
+      Bklit-lijngrafiek in deze kleuren. Voorbeelddata, verzonnen.
+    &lt;/figcaption&gt;
+    &lt;LineChart data={voorbeeld}&gt;
+      &lt;Grid horizontal /&gt;
+      &lt;Line dataKey=&quot;a&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-primary)&quot; /&gt;
+      &lt;Line dataKey=&quot;b&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-secondary)&quot; /&gt;
+      &lt;XAxis /&gt;
+      &lt;ChartTooltip /&gt;
+    &lt;/LineChart&gt;
+  &lt;/figure&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+    </div>
+    <div class="error-groups" role="region" aria-label="API error groups">
+        <section class="group">
+          <input id="no-component-found-toggle" class="group-tg" type="checkbox" hidden />
+          <label for="no-component-found-toggle" class="group-header">
+            <span class="caret">▸</span>
+            <span class="group-title">No component found</span>
+            <span class="group-count">2</span>
+          </label>
+          <div class="group-cards">
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="2026-10-01Portefeuille-dashboard">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> 2026-10-01Portefeuille-dashboard</h2>
+      <div class="badges">
+        <label for="c-error-0-lab-2026-10-01-portefeuille-dashboard-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-0-lab-2026-10-01-portefeuille-dashboard-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-0-lab-2026-10-01-portefeuille-dashboard-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx">lab-2026-10-01-portefeuille-dashboard · ./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-0-lab-2026-10-01-portefeuille-dashboard-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-0-lab-2026-10-01-portefeuille-dashboard-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-0-lab-2026-10-01-portefeuille-dashboard-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   7 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+   8 |
+&gt;  9 | const meta = {
+     | ^
+  10 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  11 |   parameters: {
+  12 |     layout: &quot;fullscreen&quot;,
+
+./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { Vergelijk as VergelijkVarianten } from &quot;@/werkbank/Vergelijk&quot;;
+
+import { VariantCompact } from &quot;./VariantCompact&quot;;
+import { VariantRustig } from &quot;./VariantRustig&quot;;
+import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  parameters: {
+    layout: &quot;fullscreen&quot;,
+    docs: {
+      description: {
+        component:
+          &quot;Drie richtingen voor het dashboard van een persoonlijke beleggingsportefeuille. Prompt, bronnen en plan staan in `prompt.md`. Alle fondsen en bedragen zijn verzonnen.&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+type Story = StoryObj&lt;typeof meta&gt;;
+
+export const Rustig: Story = {
+  render: () =&gt; &lt;VariantRustig /&gt;,
+};
+
+export const Uitgesproken: Story = {
+  render: () =&gt; &lt;VariantUitgesproken /&gt;,
+};
+
+export const Compact: Story = {
+  render: () =&gt; &lt;VariantCompact /&gt;,
+};
+
+export const Vergelijk: Story = {
+  parameters: {
+    // Drie volledige pagina&#39;s naast elkaar: elke pagina heeft een eigen &lt;main&gt; en dezelfde secties, en elke pagina
+    // staat in een &lt;section aria-label&gt; van Vergelijk. Alleen de regels over dubbele en geneste landmarks staan uit;
+    // de losse stories hierboven toetsen ze wel.
+    a11y: {
+      config: {
+        rules: [
+          { id: &quot;landmark-no-duplicate-main&quot;, enabled: false },
+          { id: &quot;landmark-main-is-top-level&quot;, enabled: false },
+          { id: &quot;landmark-unique&quot;, enabled: false },
+        ],
+      },
+    },
+  },
+  render: () =&gt; (
+    &lt;VergelijkVarianten
+      varianten={[
+        {
+          naam: &quot;Rustig&quot;,
+          richting: &quot;Eén groot kerncijfer, veel lucht en één accent.&quot;,
+          element: &lt;VariantRustig /&gt;,
+        },
+        {
+          naam: &quot;Uitgesproken&quot;,
+          richting: &quot;Het accent draagt de bovenkant; elke sectie opent met een zin.&quot;,
+          element: &lt;VariantUitgesproken /&gt;,
+        },
+        {
+          naam: &quot;Compact&quot;,
+          richting: &quot;Alles op één scherm: dichte tabel, sorteren en filteren.&quot;,
+          element: &lt;VariantCompact /&gt;,
+        },
+      ]}
+    /&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import {
+  VariantCompact,
+  VariantRustig,
+  VariantUitgesproken,
+  Vergelijk as VergelijkVarianten,
+} from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Rustig</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Rustig = () =&gt; &lt;VariantRustig /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Uitgesproken</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Uitgesproken = () =&gt; &lt;VariantUitgesproken /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Compact</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Compact = () =&gt; &lt;VariantCompact /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Vergelijk</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Vergelijk = () =&gt; (
+  &lt;VergelijkVarianten
+    varianten={[
+      {
+        naam: &quot;Rustig&quot;,
+        richting: &quot;Eén groot kerncijfer, veel lucht en één accent.&quot;,
+        element: &lt;VariantRustig /&gt;,
+      },
+      {
+        naam: &quot;Uitgesproken&quot;,
+        richting: &quot;Het accent draagt de bovenkant; elke sectie opent met een zin.&quot;,
+        element: &lt;VariantUitgesproken /&gt;,
+      },
+      {
+        naam: &quot;Compact&quot;,
+        richting: &quot;Alles op één scherm: dichte tabel, sorteren en filteren.&quot;,
+        element: &lt;VariantCompact /&gt;,
+      },
+    ]}
+  /&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="chart-thema">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> chart-thema</h2>
+      <div class="badges">
+        <label for="c-error-1-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-1-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-1-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./catalogus/chart-thema.stories.tsx">catalogus-chart-thema · ./catalogus/chart-thema.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-1-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-1-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-1-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+  83 | ];
+  84 |
+&gt; 85 | const meta = {
+     | ^
+  86 |   title: &quot;Catalogus/chart-thema&quot;,
+  87 |   parameters: {
+  88 |     docs: {
+
+./catalogus/chart-thema.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+import { curveMonotoneX } from &quot;@visx/curve&quot;;
+
+import { Grid } from &quot;@/components/charts/grid&quot;;
+import { Line } from &quot;@/components/charts/line&quot;;
+import { LineChart } from &quot;@/components/charts/line-chart&quot;;
+import { ChartTooltip } from &quot;@/components/charts/tooltip&quot;;
+import { XAxis } from &quot;@/components/charts/x-axis&quot;;
+
+import registry from &quot;../registry.json&quot;;
+
+// De waarden komen rechtstreeks uit registry.json, zodat de catalogus altijd toont wat het register uitlevert.
+const item = registry.items.find((i) =&gt; i.name === &quot;chart-thema&quot;);
+if (!item) throw new Error(&quot;chart-thema ontbreekt in registry.json&quot;);
+const licht: Record&lt;string, string&gt; = item.cssVars.light;
+const donker: Record&lt;string, string&gt; = item.cssVars.dark;
+
+const groepen: { titel: string; namen: string[] }[] = [
+  { titel: &quot;Reeksen&quot;, namen: [&quot;chart-1&quot;, &quot;chart-2&quot;, &quot;chart-3&quot;, &quot;chart-4&quot;, &quot;chart-5&quot;] },
+  {
+    titel: &quot;Vlak, tekst en hulplijnen&quot;,
+    namen: [&quot;chart-background&quot;, &quot;chart-foreground&quot;, &quot;chart-foreground-muted&quot;, &quot;chart-label&quot;, &quot;chart-grid&quot;, &quot;chart-crosshair&quot;],
+  },
+  {
+    titel: &quot;Tooltip en markers&quot;,
+    namen: [
+      &quot;chart-tooltip-background&quot;,
+      &quot;chart-tooltip-foreground&quot;,
+      &quot;chart-tooltip-muted&quot;,
+      &quot;chart-marker-background&quot;,
+      &quot;chart-marker-border&quot;,
+      &quot;chart-marker-foreground&quot;,
+    ],
+  },
+  {
+    titel: &quot;Schaal (heatmap)&quot;,
+    namen: [&quot;chart-scale-01&quot;, &quot;chart-scale-02&quot;, &quot;chart-scale-03&quot;, &quot;chart-scale-04&quot;, &quot;chart-scale-05&quot;, &quot;chart-scale-pattern-color&quot;],
+  },
+];
+
+function Kleurstalen({ isDonker }: { isDonker: boolean }) {
+  return (
+    &lt;div className=&quot;grid max-w-4xl gap-8&quot;&gt;
+      {groepen.map((groep) =&gt; (
+        &lt;section key={groep.titel} className=&quot;grid gap-3&quot;&gt;
+          &lt;h2 className=&quot;text-sm font-semibold&quot;&gt;{groep.titel}&lt;/h2&gt;
+          &lt;ul className=&quot;grid grid-cols-2 gap-3 sm:grid-cols-3&quot;&gt;
+            {groep.namen.map((naam) =&gt; {
+              const eigen = isDonker ? donker[naam] : licht[naam];
+              return (
+                &lt;li key={naam} className=&quot;flex items-center gap-3 rounded-lg border bg-card p-2&quot;&gt;
+                  &lt;span
+                    aria-hidden
+                    className=&quot;size-10 shrink-0 rounded-md border&quot;
+                    style={{ background: `var(--${naam})` }}
+                  /&gt;
+                  &lt;span className=&quot;grid min-w-0 gap-0.5&quot;&gt;
+                    &lt;code className=&quot;truncate font-mono text-xs&quot;&gt;--{naam}&lt;/code&gt;
+                    &lt;span className=&quot;truncate font-mono text-xs text-muted-foreground&quot;&gt;
+                      {eigen ?? `${licht[naam]} (zelfde als licht)`}
+                    &lt;/span&gt;
+                  &lt;/span&gt;
+                &lt;/li&gt;
+              );
+            })}
+          &lt;/ul&gt;
+        &lt;/section&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// Verzonnen voorbeelddata: twee reeksen per maand, geen echte cijfers.
+const voorbeeld = [
+  { date: new Date(&quot;2026-01-01&quot;), a: 120, b: 90 },
+  { date: new Date(&quot;2026-02-01&quot;), a: 135, b: 96 },
+  { date: new Date(&quot;2026-03-01&quot;), a: 118, b: 104 },
+  { date: new Date(&quot;2026-04-01&quot;), a: 146, b: 101 },
+  { date: new Date(&quot;2026-05-01&quot;), a: 152, b: 117 },
+  { date: new Date(&quot;2026-06-01&quot;), a: 149, b: 125 },
+  { date: new Date(&quot;2026-07-01&quot;), a: 168, b: 121 },
+  { date: new Date(&quot;2026-08-01&quot;), a: 174, b: 133 },
+];
+
+const meta = {
+  title: &quot;Catalogus/chart-thema&quot;,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          &quot;De CSS-variabelen van de Bklit-grafieken, licht en donker. Toevoegen met `npx shadcn@latest add @jasper/chart-thema`. Kleurwaarden uit Bklit UI (MIT, © Matt Litherland).&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+type Story = StoryObj&lt;typeof meta&gt;;
+
+export const Kleuren: Story = {
+  render: (_, { globals }) =&gt; &lt;Kleurstalen isDonker={globals.theme === &quot;donker&quot;} /&gt;,
+};
+
+export const Grafiek: Story = {
+  render: () =&gt; (
+    &lt;figure className=&quot;grid max-w-3xl gap-3&quot;&gt;
+      &lt;figcaption className=&quot;text-sm text-muted-foreground&quot;&gt;
+        Bklit-lijngrafiek in deze kleuren. Voorbeelddata, verzonnen.
+      &lt;/figcaption&gt;
+      &lt;LineChart data={voorbeeld}&gt;
+        &lt;Grid horizontal /&gt;
+        &lt;Line dataKey=&quot;a&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-primary)&quot; /&gt;
+        &lt;Line dataKey=&quot;b&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-secondary)&quot; /&gt;
+        &lt;XAxis /&gt;
+        &lt;ChartTooltip /&gt;
+      &lt;/LineChart&gt;
+    &lt;/figure&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ChartTooltip, Grid, Line, LineChart, XAxis } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Kleuren</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Kleuren = (_, { globals }) =&gt; &lt;Kleurstalen isDonker={globals.theme === &quot;donker&quot;} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Grafiek</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Grafiek = () =&gt; (
+  &lt;figure className=&quot;grid max-w-3xl gap-3&quot;&gt;
+    &lt;figcaption className=&quot;text-sm text-muted-foreground&quot;&gt;
+      Bklit-lijngrafiek in deze kleuren. Voorbeelddata, verzonnen.
+    &lt;/figcaption&gt;
+    &lt;LineChart data={voorbeeld}&gt;
+      &lt;Grid horizontal /&gt;
+      &lt;Line dataKey=&quot;a&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-primary)&quot; /&gt;
+      &lt;Line dataKey=&quot;b&quot; curve={curveMonotoneX} stroke=&quot;var(--chart-line-secondary)&quot; /&gt;
+      &lt;XAxis /&gt;
+      &lt;ChartTooltip /&gt;
+    &lt;/LineChart&gt;
+  &lt;/figure&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article></div>
+        </section>
+      </div>
+    <h2 class="section-title">Unattached Docs</h2>
+    <div class="grid" role="list">
+      
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Welkom</h2>
+      <div class="badges">
+        
+        <label for="doc-0-welkom-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/werkbank/Welkom.mdx">welkom--docs · ./src/werkbank/Welkom.mdx</div>
+    <div># Werkbank Hier bekijk en test je de UI van jasper-ui: de onderdelen van het register en d...</div>
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-0-welkom-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &quot;@storybook/addon-docs/blocks&quot;;
+
+&lt;Meta title=&quot;Welkom&quot; /&gt;
+
+# Werkbank
+
+Hier bekijk en test je de UI van jasper-ui: de onderdelen van het register en de experimenten uit het lab. Alles wat je
+hier ziet, staat als code in de repo [jaspervalk/jasper-ui](https://github.com/jaspervalk/jasper-ui).
+
+## Wat staat waar
+
+- **Catalogus**: elk onderdeel van het register `@jasper`, zoals een project het installeert.
+- **Lab**: hele pagina&#39;s in twee of drie richtingen, met de prompt erbij. De story _Vergelijk_ zet ze naast elkaar.
+  De data is verzonnen.
+
+## Bekijken
+
+Bovenin kies je de **huisstijl** (neutraal, de standaard van shadcn, of cockpit), **licht of donker**, en de
+**breedte**: mobiel (375), tablet (768) of desktop (1440). Onder een story staat bij **Accessibility** wat axe vindt,
+ook over contrast.
+
+## Testen
+
+`npm test` toetst elke story in elke huisstijl, licht en donker, in Chromium. Een overtreding van axe telt als fout.
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+    </div>
+    
+  </div>
+</main>
+</body>
+</html>  
