@@ -77,6 +77,16 @@ const config: StorybookConfig = {
     vite.plugins = [...(vite.plugins ?? []), werkbankLokaal(), tailwindcss()];
     vite.resolve ??= {};
     vite.resolve.alias = { ...(vite.resolve.alias as Record<string, string>), "@": join(root, "src") };
+    // Vooraf geoptimaliseerd, zodat een nieuwe variant met GSAP geen herlaadronde van Vite (en wankele tests) geeft.
+    vite.optimizeDeps ??= {};
+    vite.optimizeDeps.include = [
+      ...(vite.optimizeDeps.include ?? []),
+      "gsap",
+      "gsap/ScrollTrigger",
+      "gsap/SplitText",
+      "gsap/Flip",
+      "@gsap/react",
+    ];
     return vite;
   },
 };

@@ -1,0 +1,46 @@
+/* Werfkino, variant Affiche. Alles op de eigen wortel: stories delen één document, dus niets op :root.
+   Contrast (WCAG): inkt op grond 15,8:1; gedempt op grond 6,0:1; wit op rood 4,7:1; inkt-gedempt op inkt 7,0:1.
+   Rood haalt op grond 4,1:1 en op inkt 3,8:1: alleen voor tekst vanaf 24 px, of vet vanaf 19 px. */
+[data-merk="werfkino-affiche"] {
+  --merk-grond: #efece6; /* drukpapier */
+  --merk-inkt: #141311; /* zwart, iets warm */
+  --merk-rood: #d4351c; /* signaalrood: de affichekleur */
+  --merk-gedempt: #5c5852; /* teruggetreden inkt in het programma */
+  --merk-wit: #fcfbf8; /* kleine tekst op rood */
+  --merk-inkt-gedempt: #a39e95; /* bijtekst op het inktvlak */
+  --merk-kop: "Big Shoulders Display Variable", "Arial Narrow", sans-serif;
+  --merk-tekst: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  background: var(--merk-grond);
+  color: var(--merk-inkt);
+  font-family: var(--merk-tekst);
+  color-scheme: light;
+}
+
+/* De letters van de affichekop komen uit een masker (SplitText, mask: "chars"). Het masker knipt op de rand van de
+   letterdoos; met een regelhoogte onder 1 zou het de bovenkant van de hoofdletters afsnijden. Ruimte erbij, zonder
+   dat de zetting verschuift. */
+[data-merk="werfkino-affiche"] .kop-letter-mask {
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+/* Het programma licht op waar je bent. De kenmerken zet ScrollTrigger, en alleen als beweging mag; zonder staat de
+   hele lijst in inkt. Alleen kleur verandert, nooit de maat: zo springt er niets. */
+[data-merk="werfkino-affiche"] .film :is(.film-nr, .film-titel, .film-tekst) {
+  transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-merk="werfkino-affiche"] [data-oplichten] .film:not([data-actief]) :is(.film-nr, .film-titel, .film-tekst) {
+  color: var(--merk-gedempt);
+}
+
+[data-merk="werfkino-affiche"] [data-oplichten] .film[data-actief] .film-titel {
+  color: var(--merk-rood);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-merk="werfkino-affiche"] .film :is(.film-nr, .film-titel, .film-tekst) {
+    transition: none;
+  }
+}

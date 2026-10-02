@@ -620,7 +620,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/2 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">2/2 infos</a><span class="filter-pill ok" aria-disabled="true">6 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">6/6 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">6/6 infos</a><span class="filter-pill ok" aria-disabled="true">10 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
   </div>
 </header>
 <main>
@@ -679,18 +679,19 @@
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
-   7 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
-   8 |
-&gt;  9 | const meta = {
+   8 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+   9 |
+&gt; 10 | const meta = {
      | ^
-  10 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
-  11 |   parameters: {
-  12 |     layout: &quot;fullscreen&quot;,
+  11 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  12 |   decorators: [
+  13 |     metVoorbeeldlabel(
 
 ./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:
 import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
 
 import { Vergelijk as VergelijkVarianten } from &quot;@/werkbank/Vergelijk&quot;;
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
 
 import { VariantCompact } from &quot;./VariantCompact&quot;;
 import { VariantRustig } from &quot;./VariantRustig&quot;;
@@ -698,6 +699,11 @@ import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
 
 const meta = {
   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  decorators: [
+    metVoorbeeldlabel(
+      &quot;Fondsen en bedragen zijn verzonnen; dit is niet je echte portefeuille. Een proef om te zien hoe de agent een dashboard ontwerpt, in drie richtingen.&quot;,
+    ),
+  ],
   parameters: {
     layout: &quot;fullscreen&quot;,
     docs: {
@@ -857,6 +863,116 @@ export const Vergelijk: Story = {
   </div>
 </article>
 <article
+  id="lab-2026-10-01-werfkino-affiche"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Affiche">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Affiche</h2>
+      <div class="badges">
+        <label for="c-1-lab-2026-10-01-werfkino-affiche-err" class="badge err as-toggle">API error</label>
+        <label for="c-1-lab-2026-10-01-werfkino-affiche-info" class="badge info as-toggle">1 info</label>
+        <label for="c-1-lab-2026-10-01-werfkino-affiche-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx">lab-2026-10-01-werfkino-affiche · ./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-1-lab-2026-10-01-werfkino-affiche-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-1-lab-2026-10-01-werfkino-affiche-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-1-lab-2026-10-01-werfkino-affiche-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Affiche&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Affiche&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Affiche: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Affiche</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Affiche = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
   id="catalogus-chart-thema"
   class="card 
   has-error
@@ -871,9 +987,9 @@ export const Vergelijk: Story = {
     <div class="title">
       <h2><span class="status-dot dot-err"></span> chart-thema</h2>
       <div class="badges">
-        <label for="c-1-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
-        <label for="c-1-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-2-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
+        <label for="c-2-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
+        <label for="c-2-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
         
         
       </div>
@@ -885,9 +1001,9 @@ export const Vergelijk: Story = {
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-1-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-1-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-1-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-2-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-2-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-2-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -1090,6 +1206,379 @@ export const Grafiek: Story = {
     
   </div>
 </article>
+<article
+  id="lab-2026-10-01-werfkino-nacht"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Nacht">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Nacht</h2>
+      <div class="badges">
+        <label for="c-3-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-3-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-3-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx">lab-2026-10-01-werfkino-nacht · ./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-3-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-3-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-3-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Nacht&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Nacht&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Nacht</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Nacht = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="lab-2026-10-01-werfkino-redactioneel"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Redactioneel">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Redactioneel</h2>
+      <div class="badges">
+        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
+        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
+        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx">lab-2026-10-01-werfkino-redactioneel · ./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Redactioneel&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Redactioneel&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Redactioneel</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Redactioneel = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  id="lab-2026-10-01-werfkino-vergelijk"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Vergelijk">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Vergelijk</h2>
+      <div class="badges">
+        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
+        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
+        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/vergelijk.stories.tsx">lab-2026-10-01-werfkino-vergelijk · ./lab/2026-10-01-werfkino/vergelijk.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   7 | // De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:
+   8 | // in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.
+&gt;  9 | const meta = {
+     | ^
+  10 |   title: &quot;Lab/2026-10-01 Werfkino/Vergelijk&quot;,
+  11 |   tags: [&quot;!test&quot;],
+  12 |   parameters: { layout: &quot;fullscreen&quot;, a11y: { options: { iframes: false } } },
+
+./lab/2026-10-01-werfkino/vergelijk.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { storyId, VergelijkVensters } from &quot;@/werkbank/VergelijkVensters&quot;;
+
+const map = &quot;Lab/2026-10-01 Werfkino&quot;;
+
+// De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:
+// in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Vergelijk&quot;,
+  tags: [&quot;!test&quot;],
+  parameters: { layout: &quot;fullscreen&quot;, a11y: { options: { iframes: false } } },
+} satisfies Meta;
+
+export default meta;
+
+export const Vergelijk: StoryObj&lt;typeof meta&gt; = {
+  render: (_, { globals }) =&gt; (
+    &lt;VergelijkVensters
+      globals={globals}
+      vensters={[
+        {
+          naam: &quot;Redactioneel&quot;,
+          richting: &quot;Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.&quot;,
+          storyId: storyId(`${map}/Redactioneel`, &quot;Redactioneel&quot;),
+        },
+        {
+          naam: &quot;Nacht&quot;,
+          richting: &quot;De hal &#39;s avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.&quot;,
+          storyId: storyId(`${map}/Nacht`, &quot;Nacht&quot;),
+        },
+        {
+          naam: &quot;Affiche&quot;,
+          richting: &quot;Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.&quot;,
+          storyId: storyId(`${map}/Affiche`, &quot;Affiche&quot;),
+        },
+      ]}
+    /&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { VergelijkVensters } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Vergelijk</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Vergelijk = (_, { globals }) =&gt; (
+  &lt;VergelijkVensters
+    globals={globals}
+    vensters={[
+      {
+        naam: &quot;Redactioneel&quot;,
+        richting: &quot;Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.&quot;,
+        storyId: storyId(`${map}/Redactioneel`, &quot;Redactioneel&quot;),
+      },
+      {
+        naam: &quot;Nacht&quot;,
+        richting: &quot;De hal &#39;s avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.&quot;,
+        storyId: storyId(`${map}/Nacht`, &quot;Nacht&quot;),
+      },
+      {
+        naam: &quot;Affiche&quot;,
+        richting: &quot;Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.&quot;,
+        storyId: storyId(`${map}/Affiche`, &quot;Affiche&quot;),
+      },
+    ]}
+  /&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
     </div>
     <div class="error-groups" role="region" aria-label="API error groups">
         <section class="group">
@@ -1097,7 +1586,7 @@ export const Grafiek: Story = {
           <label for="no-component-found-toggle" class="group-header">
             <span class="caret">▸</span>
             <span class="group-title">No component found</span>
-            <span class="group-count">2</span>
+            <span class="group-count">6</span>
           </label>
           <div class="group-cards">
 <article
@@ -1143,18 +1632,19 @@ export const Grafiek: Story = {
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
-   7 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
-   8 |
-&gt;  9 | const meta = {
+   8 | import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
+   9 |
+&gt; 10 | const meta = {
      | ^
-  10 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
-  11 |   parameters: {
-  12 |     layout: &quot;fullscreen&quot;,
+  11 |   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  12 |   decorators: [
+  13 |     metVoorbeeldlabel(
 
 ./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:
 import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
 
 import { Vergelijk as VergelijkVarianten } from &quot;@/werkbank/Vergelijk&quot;;
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
 
 import { VariantCompact } from &quot;./VariantCompact&quot;;
 import { VariantRustig } from &quot;./VariantRustig&quot;;
@@ -1162,6 +1652,11 @@ import { VariantUitgesproken } from &quot;./VariantUitgesproken&quot;;
 
 const meta = {
   title: &quot;Lab/2026-10-01 Portefeuille-dashboard&quot;,
+  decorators: [
+    metVoorbeeldlabel(
+      &quot;Fondsen en bedragen zijn verzonnen; dit is niet je echte portefeuille. Een proef om te zien hoe de agent een dashboard ontwerpt, in drie richtingen.&quot;,
+    ),
+  ],
   parameters: {
     layout: &quot;fullscreen&quot;,
     docs: {
@@ -1330,14 +1825,124 @@ export const Vergelijk: Story = {
   
   no-doc-error"
   role="listitem"
+  aria-label="Affiche">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Affiche</h2>
+      <div class="badges">
+        <label for="c-error-1-lab-2026-10-01-werfkino-affiche-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-1-lab-2026-10-01-werfkino-affiche-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-1-lab-2026-10-01-werfkino-affiche-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx">lab-2026-10-01-werfkino-affiche · ./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-1-lab-2026-10-01-werfkino-affiche-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-1-lab-2026-10-01-werfkino-affiche-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-1-lab-2026-10-01-werfkino-affiche-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Affiche&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Affiche&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Affiche: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Affiche</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Affiche = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
   aria-label="chart-thema">
   <div class="head">
     <div class="title">
       <h2><span class="status-dot dot-err"></span> chart-thema</h2>
       <div class="badges">
-        <label for="c-error-1-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
-        <label for="c-error-1-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
-        <label for="c-error-1-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-error-2-catalogus-chart-thema-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-2-catalogus-chart-thema-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-2-catalogus-chart-thema-stories" class="badge ok as-toggle">2 stories</label>
         
         
       </div>
@@ -1349,9 +1954,9 @@ export const Vergelijk: Story = {
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-error-1-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-error-1-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-error-1-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-error-2-catalogus-chart-thema-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-2-catalogus-chart-thema-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-2-catalogus-chart-thema-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -1546,6 +2151,379 @@ export const Grafiek: Story = {
       &lt;ChartTooltip /&gt;
     &lt;/LineChart&gt;
   &lt;/figure&gt;
+);</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Nacht">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Nacht</h2>
+      <div class="badges">
+        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx">lab-2026-10-01-werfkino-nacht · ./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Nacht&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Nacht&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Nacht</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Nacht = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Redactioneel">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Redactioneel</h2>
+      <div class="badges">
+        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx">lab-2026-10-01-werfkino-redactioneel · ./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   5 | import { Pagina } from &quot;./Pagina&quot;;
+   6 |
+&gt;  7 | const meta = {
+     | ^
+   8 |   title: &quot;Lab/2026-10-01 Werfkino/Redactioneel&quot;,
+   9 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  10 |   decorators: [
+
+./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+import { Pagina } from &quot;./Pagina&quot;;
+
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Redactioneel&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(&quot;Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.&quot;),
+  ],
+  parameters: { layout: &quot;fullscreen&quot; },
+} satisfies Meta;
+
+export default meta;
+
+export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Pagina } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Redactioneel</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Redactioneel = () =&gt; &lt;Pagina /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="Vergelijk">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> Vergelijk</h2>
+      <div class="badges">
+        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./lab/2026-10-01-werfkino/vergelijk.stories.tsx">lab-2026-10-01-werfkino-vergelijk · ./lab/2026-10-01-werfkino/vergelijk.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+   7 | // De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:
+   8 | // in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.
+&gt;  9 | const meta = {
+     | ^
+  10 |   title: &quot;Lab/2026-10-01 Werfkino/Vergelijk&quot;,
+  11 |   tags: [&quot;!test&quot;],
+  12 |   parameters: { layout: &quot;fullscreen&quot;, a11y: { options: { iframes: false } } },
+
+./lab/2026-10-01-werfkino/vergelijk.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { storyId, VergelijkVensters } from &quot;@/werkbank/VergelijkVensters&quot;;
+
+const map = &quot;Lab/2026-10-01 Werfkino&quot;;
+
+// De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:
+// in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.
+const meta = {
+  title: &quot;Lab/2026-10-01 Werfkino/Vergelijk&quot;,
+  tags: [&quot;!test&quot;],
+  parameters: { layout: &quot;fullscreen&quot;, a11y: { options: { iframes: false } } },
+} satisfies Meta;
+
+export default meta;
+
+export const Vergelijk: StoryObj&lt;typeof meta&gt; = {
+  render: (_, { globals }) =&gt; (
+    &lt;VergelijkVensters
+      globals={globals}
+      vensters={[
+        {
+          naam: &quot;Redactioneel&quot;,
+          richting: &quot;Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.&quot;,
+          storyId: storyId(`${map}/Redactioneel`, &quot;Redactioneel&quot;),
+        },
+        {
+          naam: &quot;Nacht&quot;,
+          richting: &quot;De hal &#39;s avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.&quot;,
+          storyId: storyId(`${map}/Nacht`, &quot;Nacht&quot;),
+        },
+        {
+          naam: &quot;Affiche&quot;,
+          richting: &quot;Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.&quot;,
+          storyId: storyId(`${map}/Affiche`, &quot;Affiche&quot;),
+        },
+      ]}
+    /&gt;
+  ),
+};
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { VergelijkVensters } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Vergelijk</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Vergelijk = (_, { globals }) =&gt; (
+  &lt;VergelijkVensters
+    globals={globals}
+    vensters={[
+      {
+        naam: &quot;Redactioneel&quot;,
+        richting: &quot;Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.&quot;,
+        storyId: storyId(`${map}/Redactioneel`, &quot;Redactioneel&quot;),
+      },
+      {
+        naam: &quot;Nacht&quot;,
+        richting: &quot;De hal &#39;s avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.&quot;,
+        storyId: storyId(`${map}/Nacht`, &quot;Nacht&quot;),
+      },
+      {
+        naam: &quot;Affiche&quot;,
+        richting: &quot;Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.&quot;,
+        storyId: storyId(`${map}/Affiche`, &quot;Affiche&quot;),
+      },
+    ]}
+  /&gt;
 );</code></pre>
               
             </div>
@@ -1596,8 +2574,9 @@ hier ziet, staat als code in de repo [jaspervalk/jasper-ui](https://github.com/j
 ## Wat staat waar
 
 - **Catalogus**: elk onderdeel van het register `@jasper`, zoals een project het installeert.
-- **Lab**: hele pagina&#39;s in twee of drie richtingen, met de prompt erbij. De story _Vergelijk_ zet ze naast elkaar.
-  De data is verzonnen.
+- **Lab**: hele pagina&#39;s (dashboards en landingspagina&#39;s) in drie richtingen, elk gebouwd door een eigen agent met een
+  eigen prompt. De story _Vergelijk_ zet ze naast elkaar; bij landingspagina&#39;s elk in een eigen venster, met
+  _Samen scrollen_. Merken, cijfers en teksten in het lab zijn verzonnen.
 
 ## Bekijken
 

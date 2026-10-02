@@ -50,16 +50,25 @@ Een [Storybook](https://storybook.js.org/) om UI te bekijken en te testen, openb
 | `npm test` | Elke story in elke huisstijl, licht en donker, in Chromium, met axe (ook contrast). |
 | `npm run typecheck` | TypeScript. |
 | `npm run build` | Register naar `docs/r/`, werkbank naar `docs/storybook/`, en een controle dat er niets lokaals in staat. |
+| `node scripts/lab-beelden.mjs <map> <filter>` | Beelden (1440 en 375 px, licht en donker) en een video van de beweging (webm en mp4) van lab-stories. |
 
 | Map | Wat |
 | --- | --- |
 | `catalogus/` | Een story per onderdeel van het register. |
-| `lab/<datum>-<onderwerp>/` | Hele pagina's in twee of drie richtingen, met de prompt erbij en een story die ze naast elkaar zet. |
+| `lab/<datum>-<onderwerp>/` | Hele pagina's in twee of drie richtingen, met de prompts erbij en een story die ze naast elkaar zet. |
+| `src/werkbank/` | Hulpmiddelen van de werkbank: `Vergelijk`, `VergelijkVensters` (elke variant in een eigen venster, samen scrollen), het voorbeeldlabel, de zichtbaarheidscheck. |
+| `src/lib/beweging.ts` | GSAP voor landingspagina's: plugins, en animaties alleen als "beweging beperken" uit staat. |
 | `themes/` | Huisstijlen in de tokennamen van shadcn: `neutraal` (standaard van shadcn) en `cockpit`. |
 | `src/styles/basis.css` | Tailwind 4 en de koppeling van de tokens. |
 | `src/components/charts/` | Bklit-grafieken (MIT), toegevoegd met `shadcn add @bklit/…`. |
 
 Wissel in de werkbalk van huisstijl, van licht naar donker, en van viewport (375, 768, 1440).
+
+Het lab vult zich met het commando `/lab <opdracht>` in Claude Code (bijvoorbeeld `/lab landing voor een verzonnen
+filmfestival`): drie agents bouwen tegelijk elk één richting, met een eigen prompt, en de werkbank zet ze naast elkaar.
+Een winnaar kan een template in het register worden. Alles in het lab is verzonnen: merken, cijfers en teksten.
+Tests draaien met "beweging beperken" aan, zodat axe de eindtoestand ziet en tekst die op een animatie blijft wachten
+opvalt.
 
 Twee mappen zijn alleen lokaal en staan in `.gitignore`: `proeftuin/` (componenten van Bklit of 21st.dev uitproberen
 voordat ze een project in gaan; 21st.dev verbiedt herdistributie) en `themes/lokaal/` (huisstijlen die niet openbaar

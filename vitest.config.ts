@@ -22,17 +22,26 @@ const combinaties = huisstijlen.flatMap((huisstijl) => (["licht", "donker"] as c
 // gebruikt het standaardthema; `npm test` draait de hele matrix.
 const binnenStorybook = process.env.VITEST_STORYBOOK === "true";
 
+// Stories met tag `merk` (landingspagina's van een verzonnen merk) hebben eigen kleuren en reageren niet op de
+// huisstijl. Die draaien alleen in neutraal, licht en donker; dat scheelt dubbele runs.
+const tags = (huisstijl: string) => ({ include: ["test"], exclude: huisstijl === "neutraal" ? [] : ["merk"] });
+
 export default defineConfig({
   test: {
     projects: (binnenStorybook ? [{ huisstijl: "neutraal", theme: "licht" }] : combinaties).map(({ huisstijl, theme }) => ({
       extends: true,
-      plugins: [storybookTest({ configDir: join(root, ".storybook"), initialGlobals: { huisstijl, theme } })],
+      plugins: [
+        storybookTest({ configDir: join(root, ".storybook"), initialGlobals: { huisstijl, theme }, tags: tags(huisstijl) }),
+      ],
       test: {
         name: binnenStorybook ? "storybook" : `${huisstijl}-${theme}`,
         browser: {
           enabled: true,
           headless: true,
-          provider: playwright({}),
+          // Tests zien de pagina zoals iemand met "beweging beperken": GSAP zet dan niets op, axe toetst de
+          // eindtoestand, en de check in preview.tsx ziet tekst die onzichtbaar blijft. Het bewegende pad toetst
+          // scripts/lab-beelden.mjs (fouten in de console laten dat script falen).
+          provider: playwright({ contextOptions: { reducedMotion: "reduce" } }),
           instances: [{ browser: "chromium" }],
         },
       },

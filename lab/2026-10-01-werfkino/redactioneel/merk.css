@@ -1,0 +1,107 @@
+/* Werfkino, richting Redactioneel: een filmtijdschrift op warm papier. Alles hangt aan de eigen wortel, zodat niets
+   naar andere stories lekt. Contrast op papier: inkt 15,9:1, gedempt 6,1:1, rood 6,7:1; op papier-2: gedempt 5,4:1,
+   rood 5,9:1. Papier op rood (de knop): 6,7:1.
+
+   Let op: deze regels staan buiten de lagen van Tailwind en winnen dus van utilities. Daarom staat hier alleen wat
+   Tailwind niet goed kan: de initiaal, de maskers van SplitText en de vastgezette stand van het programma. */
+[data-merk="werfkino-redactioneel"] {
+  --merk-papier: #f2efe8;
+  --merk-papier-2: #e7e1d5;
+  --merk-inkt: #171512;
+  --merk-gedempt: #5e584f;
+  --merk-lijn: #c4bcad;
+  --merk-rood: #9a2a1e;
+  --merk-rood-diep: #7a2016;
+  --merk-kop: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --merk-tekst: "Inter Variable", Inter, system-ui, sans-serif;
+
+  background: var(--merk-papier);
+  color: var(--merk-inkt);
+  font-family: var(--merk-tekst);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+[data-merk="werfkino-redactioneel"] ::selection {
+  background: var(--merk-rood);
+  color: var(--merk-papier);
+}
+
+/* Initiaal van het manifest: het ene rode detail in die sectie. */
+[data-merk="werfkino-redactioneel"] .rd-initiaal::first-letter {
+  float: left;
+  margin: 0.1em 0.07em 0 -0.02em;
+  font-family: var(--merk-kop);
+  font-size: 5.1em;
+  line-height: 0.74;
+  color: var(--merk-rood);
+}
+
+/* SplitText zet elke regel van de h1 in een masker met overflow: clip. Wat ruimte rond het masker, zodat staarten
+   (g, f) en de overhang van de cursief niet worden afgeknipt. */
+[data-merk="werfkino-redactioneel"] .rd-kopregel-mask {
+  padding: 0 0.12em 0.14em 0;
+  margin: 0 -0.12em -0.14em 0;
+}
+
+/* Programma: standaard een gewone lijst. Alleen als GSAP de sectie vastzet (breed scherm, beweging mag) zet het script
+   data-gepind; dan liggen de films op elkaar en wisselt er één tegelijk. */
+[data-merk="werfkino-redactioneel"] .rd-index {
+  display: none;
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  padding-block: 1.75rem 1.5rem;
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] > .rd-binnen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-programma-kop {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-programma-kopregel {
+  border-bottom: 1px solid var(--merk-inkt);
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-films {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-film {
+  grid-area: 1 / 1;
+  border-top: 0;
+  padding-block: 0;
+  align-items: end;
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-cijfer {
+  font-size: min(54svh, 29vw);
+}
+
+[data-merk="werfkino-redactioneel"] [data-gepind] .rd-index {
+  display: block;
+}
+
+/* De doorsnede van Hal 4 schaalt mee; op een telefoon worden de nummers anders te klein om te lezen. */
+[data-merk="werfkino-redactioneel"] .rd-marker {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (max-width: 639px) {
+  [data-merk="werfkino-redactioneel"] .rd-marker {
+    scale: 2.2;
+  }
+}

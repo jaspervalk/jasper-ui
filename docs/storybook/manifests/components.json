@@ -31,7 +31,7 @@
       "jsDocTags": {},
       "error": {
         "name": "No component found",
-        "message": "We could not detect the component from your story file. Specify meta.component.\n   7 | import { VariantUitgesproken } from \"./VariantUitgesproken\";\n   8 |\n>  9 | const meta = {\n     | ^\n  10 |   title: \"Lab/2026-10-01 Portefeuille-dashboard\",\n  11 |   parameters: {\n  12 |     layout: \"fullscreen\",\n\n./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { Vergelijk as VergelijkVarianten } from \"@/werkbank/Vergelijk\";\n\nimport { VariantCompact } from \"./VariantCompact\";\nimport { VariantRustig } from \"./VariantRustig\";\nimport { VariantUitgesproken } from \"./VariantUitgesproken\";\n\nconst meta = {\n  title: \"Lab/2026-10-01 Portefeuille-dashboard\",\n  parameters: {\n    layout: \"fullscreen\",\n    docs: {\n      description: {\n        component:\n          \"Drie richtingen voor het dashboard van een persoonlijke beleggingsportefeuille. Prompt, bronnen en plan staan in `prompt.md`. Alle fondsen en bedragen zijn verzonnen.\",\n      },\n    },\n  },\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const Rustig: Story = {\n  render: () => <VariantRustig />,\n};\n\nexport const Uitgesproken: Story = {\n  render: () => <VariantUitgesproken />,\n};\n\nexport const Compact: Story = {\n  render: () => <VariantCompact />,\n};\n\nexport const Vergelijk: Story = {\n  parameters: {\n    // Drie volledige pagina's naast elkaar: elke pagina heeft een eigen <main> en dezelfde secties, en elke pagina\n    // staat in een <section aria-label> van Vergelijk. Alleen de regels over dubbele en geneste landmarks staan uit;\n    // de losse stories hierboven toetsen ze wel.\n    a11y: {\n      config: {\n        rules: [\n          { id: \"landmark-no-duplicate-main\", enabled: false },\n          { id: \"landmark-main-is-top-level\", enabled: false },\n          { id: \"landmark-unique\", enabled: false },\n        ],\n      },\n    },\n  },\n  render: () => (\n    <VergelijkVarianten\n      varianten={[\n        {\n          naam: \"Rustig\",\n          richting: \"Eén groot kerncijfer, veel lucht en één accent.\",\n          element: <VariantRustig />,\n        },\n        {\n          naam: \"Uitgesproken\",\n          richting: \"Het accent draagt de bovenkant; elke sectie opent met een zin.\",\n          element: <VariantUitgesproken />,\n        },\n        {\n          naam: \"Compact\",\n          richting: \"Alles op één scherm: dichte tabel, sorteren en filteren.\",\n          element: <VariantCompact />,\n        },\n      ]}\n    />\n  ),\n};\n"
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   8 | import { VariantUitgesproken } from \"./VariantUitgesproken\";\n   9 |\n> 10 | const meta = {\n     | ^\n  11 |   title: \"Lab/2026-10-01 Portefeuille-dashboard\",\n  12 |   decorators: [\n  13 |     metVoorbeeldlabel(\n\n./lab/2026-10-01-portefeuille-dashboard/portefeuille-dashboard.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { Vergelijk as VergelijkVarianten } from \"@/werkbank/Vergelijk\";\nimport { metVoorbeeldlabel } from \"@/werkbank/Voorbeeld\";\n\nimport { VariantCompact } from \"./VariantCompact\";\nimport { VariantRustig } from \"./VariantRustig\";\nimport { VariantUitgesproken } from \"./VariantUitgesproken\";\n\nconst meta = {\n  title: \"Lab/2026-10-01 Portefeuille-dashboard\",\n  decorators: [\n    metVoorbeeldlabel(\n      \"Fondsen en bedragen zijn verzonnen; dit is niet je echte portefeuille. Een proef om te zien hoe de agent een dashboard ontwerpt, in drie richtingen.\",\n    ),\n  ],\n  parameters: {\n    layout: \"fullscreen\",\n    docs: {\n      description: {\n        component:\n          \"Drie richtingen voor het dashboard van een persoonlijke beleggingsportefeuille. Prompt, bronnen en plan staan in `prompt.md`. Alle fondsen en bedragen zijn verzonnen.\",\n      },\n    },\n  },\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const Rustig: Story = {\n  render: () => <VariantRustig />,\n};\n\nexport const Uitgesproken: Story = {\n  render: () => <VariantUitgesproken />,\n};\n\nexport const Compact: Story = {\n  render: () => <VariantCompact />,\n};\n\nexport const Vergelijk: Story = {\n  parameters: {\n    // Drie volledige pagina's naast elkaar: elke pagina heeft een eigen <main> en dezelfde secties, en elke pagina\n    // staat in een <section aria-label> van Vergelijk. Alleen de regels over dubbele en geneste landmarks staan uit;\n    // de losse stories hierboven toetsen ze wel.\n    a11y: {\n      config: {\n        rules: [\n          { id: \"landmark-no-duplicate-main\", enabled: false },\n          { id: \"landmark-main-is-top-level\", enabled: false },\n          { id: \"landmark-unique\", enabled: false },\n        ],\n      },\n    },\n  },\n  render: () => (\n    <VergelijkVarianten\n      varianten={[\n        {\n          naam: \"Rustig\",\n          richting: \"Eén groot kerncijfer, veel lucht en één accent.\",\n          element: <VariantRustig />,\n        },\n        {\n          naam: \"Uitgesproken\",\n          richting: \"Het accent draagt de bovenkant; elke sectie opent met een zin.\",\n          element: <VariantUitgesproken />,\n        },\n        {\n          naam: \"Compact\",\n          richting: \"Alles op één scherm: dichte tabel, sorteren en filteren.\",\n          element: <VariantCompact />,\n        },\n      ]}\n    />\n  ),\n};\n"
       },
       "stories": [
         {
@@ -56,10 +56,82 @@
         }
       ],
       "import": "import {\n  VariantCompact,\n  VariantRustig,\n  VariantUitgesproken,\n  Vergelijk as VergelijkVarianten,\n} from 'jasper-ui';"
+    },
+    "lab-2026-10-01-werfkino-vergelijk": {
+      "id": "lab-2026-10-01-werfkino-vergelijk",
+      "name": "Vergelijk",
+      "path": "./lab/2026-10-01-werfkino/vergelijk.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   7 | // De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:\n   8 | // in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.\n>  9 | const meta = {\n     | ^\n  10 |   title: \"Lab/2026-10-01 Werfkino/Vergelijk\",\n  11 |   tags: [\"!test\"],\n  12 |   parameters: { layout: \"fullscreen\", a11y: { options: { iframes: false } } },\n\n./lab/2026-10-01-werfkino/vergelijk.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { storyId, VergelijkVensters } from \"@/werkbank/VergelijkVensters\";\n\nconst map = \"Lab/2026-10-01 Werfkino\";\n\n// De drie richtingen naast elkaar, elk in een eigen venster (eigen scroll, dus ScrollTrigger werkt). Niet getest:\n// in Vitest bestaat iframe.html niet, en elke variant wordt al los getest.\nconst meta = {\n  title: \"Lab/2026-10-01 Werfkino/Vergelijk\",\n  tags: [\"!test\"],\n  parameters: { layout: \"fullscreen\", a11y: { options: { iframes: false } } },\n} satisfies Meta;\n\nexport default meta;\n\nexport const Vergelijk: StoryObj<typeof meta> = {\n  render: (_, { globals }) => (\n    <VergelijkVensters\n      globals={globals}\n      vensters={[\n        {\n          naam: \"Redactioneel\",\n          richting: \"Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.\",\n          storyId: storyId(`${map}/Redactioneel`, \"Redactioneel\"),\n        },\n        {\n          naam: \"Nacht\",\n          richting: \"De hal 's avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.\",\n          storyId: storyId(`${map}/Nacht`, \"Nacht\"),\n        },\n        {\n          naam: \"Affiche\",\n          richting: \"Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.\",\n          storyId: storyId(`${map}/Affiche`, \"Affiche\"),\n        },\n      ]}\n    />\n  ),\n};\n"
+      },
+      "stories": [
+        {
+          "id": "lab-2026-10-01-werfkino-vergelijk--vergelijk",
+          "name": "Vergelijk",
+          "snippet": "const Vergelijk = (_, { globals }) => (\n  <VergelijkVensters\n    globals={globals}\n    vensters={[\n      {\n        naam: \"Redactioneel\",\n        richting: \"Een filmtijdschrift op warm papier: schreef, aftiteling, en een programma om door te bladeren.\",\n        storyId: storyId(`${map}/Redactioneel`, \"Redactioneel\"),\n      },\n      {\n        naam: \"Nacht\",\n        richting: \"De hal 's avonds: zwart, staal en natriumoranje, met een doek dat opengaat als je scrolt.\",\n        storyId: storyId(`${map}/Nacht`, \"Nacht\"),\n      },\n      {\n        naam: \"Affiche\",\n        richting: \"Een festivalaffiche om te scrollen: reuzenletters in rood, en een programma dat oplicht.\",\n        storyId: storyId(`${map}/Affiche`, \"Affiche\"),\n      },\n    ]}\n  />\n);"
+        }
+      ],
+      "import": "import { VergelijkVensters } from 'jasper-ui';"
+    },
+    "lab-2026-10-01-werfkino-affiche": {
+      "id": "lab-2026-10-01-werfkino-affiche",
+      "name": "Affiche",
+      "path": "./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   5 | import { Pagina } from \"./Pagina\";\n   6 |\n>  7 | const meta = {\n     | ^\n   8 |   title: \"Lab/2026-10-01 Werfkino/Affiche\",\n   9 |   tags: [\"merk\", \"beweging\"],\n  10 |   decorators: [\n\n./lab/2026-10-01-werfkino/affiche/affiche.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { metVoorbeeldlabel } from \"@/werkbank/Voorbeeld\";\n\nimport { Pagina } from \"./Pagina\";\n\nconst meta = {\n  title: \"Lab/2026-10-01 Werfkino/Affiche\",\n  tags: [\"merk\", \"beweging\"],\n  decorators: [\n    metVoorbeeldlabel(\"Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.\"),\n  ],\n  parameters: { layout: \"fullscreen\" },\n} satisfies Meta;\n\nexport default meta;\n\nexport const Affiche: StoryObj<typeof meta> = { render: () => <Pagina /> };\n"
+      },
+      "stories": [
+        {
+          "id": "lab-2026-10-01-werfkino-affiche--affiche",
+          "name": "Affiche",
+          "snippet": "const Affiche = () => <Pagina />;"
+        }
+      ],
+      "import": "import { Pagina } from 'jasper-ui';"
+    },
+    "lab-2026-10-01-werfkino-nacht": {
+      "id": "lab-2026-10-01-werfkino-nacht",
+      "name": "Nacht",
+      "path": "./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   5 | import { Pagina } from \"./Pagina\";\n   6 |\n>  7 | const meta = {\n     | ^\n   8 |   title: \"Lab/2026-10-01 Werfkino/Nacht\",\n   9 |   tags: [\"merk\", \"beweging\"],\n  10 |   decorators: [\n\n./lab/2026-10-01-werfkino/nacht/nacht.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { metVoorbeeldlabel } from \"@/werkbank/Voorbeeld\";\n\nimport { Pagina } from \"./Pagina\";\n\nconst meta = {\n  title: \"Lab/2026-10-01 Werfkino/Nacht\",\n  tags: [\"merk\", \"beweging\"],\n  decorators: [\n    metVoorbeeldlabel(\"Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.\"),\n  ],\n  parameters: { layout: \"fullscreen\" },\n} satisfies Meta;\n\nexport default meta;\n\nexport const Nacht: StoryObj<typeof meta> = { render: () => <Pagina /> };\n"
+      },
+      "stories": [
+        {
+          "id": "lab-2026-10-01-werfkino-nacht--nacht",
+          "name": "Nacht",
+          "snippet": "const Nacht = () => <Pagina />;"
+        }
+      ],
+      "import": "import { Pagina } from 'jasper-ui';"
+    },
+    "lab-2026-10-01-werfkino-redactioneel": {
+      "id": "lab-2026-10-01-werfkino-redactioneel",
+      "name": "Redactioneel",
+      "path": "./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   5 | import { Pagina } from \"./Pagina\";\n   6 |\n>  7 | const meta = {\n     | ^\n   8 |   title: \"Lab/2026-10-01 Werfkino/Redactioneel\",\n   9 |   tags: [\"merk\", \"beweging\"],\n  10 |   decorators: [\n\n./lab/2026-10-01-werfkino/redactioneel/redactioneel.stories.tsx:\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\n\nimport { metVoorbeeldlabel } from \"@/werkbank/Voorbeeld\";\n\nimport { Pagina } from \"./Pagina\";\n\nconst meta = {\n  title: \"Lab/2026-10-01 Werfkino/Redactioneel\",\n  tags: [\"merk\", \"beweging\"],\n  decorators: [\n    metVoorbeeldlabel(\"Werfkino bestaat niet: een verzonnen festival, om te zien hoe de agent een landingspagina ontwerpt.\"),\n  ],\n  parameters: { layout: \"fullscreen\" },\n} satisfies Meta;\n\nexport default meta;\n\nexport const Redactioneel: StoryObj<typeof meta> = { render: () => <Pagina /> };\n"
+      },
+      "stories": [
+        {
+          "id": "lab-2026-10-01-werfkino-redactioneel--redactioneel",
+          "name": "Redactioneel",
+          "snippet": "const Redactioneel = () => <Pagina />;"
+        }
+      ],
+      "import": "import { Pagina } from 'jasper-ui';"
     }
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 376
+    "durationMs": 445
   }
 }

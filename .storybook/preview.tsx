@@ -2,6 +2,7 @@ import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import type { Decorator, Preview } from "@storybook/react-vite";
 import { lokaleHuisstijlen } from "virtual:werkbank-lokaal";
 
+import { onzichtbareTekst } from "../src/werkbank/zichtbaarheid";
 import { donker, licht } from "./werkbank-thema";
 
 import "../src/styles/basis.css";
@@ -34,6 +35,16 @@ const preview: Preview = {
   initialGlobals: {
     huisstijl: "neutraal",
   },
+  // Stories met tag `beweging`: onder "beweging beperken" (zo draaien de tests) mag geen tekst onzichtbaar blijven.
+  // Alleen in de story-weergave en alleen bij reduced motion, zodat de werkbank zelf nooit een foutscherm toont.
+  afterEach: ({ tags, canvasElement, viewMode }) => {
+    if (viewMode !== "story" || !tags.includes("beweging")) return;
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const verborgen = onzichtbareTekst(canvasElement);
+    if (verborgen.length) {
+      throw new Error(`Onder "beweging beperken" blijft tekst onzichtbaar: ${verborgen.slice(0, 6).join(", ")}`);
+    }
+  },
   decorators: [
     metHuisstijl,
     withThemeByDataAttribute({
@@ -57,7 +68,8 @@ const preview: Preview = {
     controls: { expanded: true },
     options: {
       // Wat hier niet staat, komt erna op alfabet. Noem lokale mappen hier niet: dit bestand gaat mee in de build.
-      storySort: { order: ["Welkom", "Catalogus", "Lab"] },
+      // In elk lab-experiment staat Vergelijk bovenaan, daarna de varianten.
+      storySort: { order: ["Welkom", "Catalogus", "Lab", ["*", ["Vergelijk", "*"]]] },
     },
     // Docs-pagina's (zoals Welkom) volgen, net als het frame, de systeeminstelling.
     docs: { theme: window.matchMedia("(prefers-color-scheme: dark)").matches ? donker : licht },

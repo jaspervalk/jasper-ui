@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Vergelijk as VergelijkVarianten } from "@/werkbank/Vergelijk";
+import { metVoorbeeldlabel } from "@/werkbank/Voorbeeld";
 
 import { VariantCompact } from "./VariantCompact";
 import { VariantRustig } from "./VariantRustig";
@@ -8,6 +9,11 @@ import { VariantUitgesproken } from "./VariantUitgesproken";
 
 const meta = {
   title: "Lab/2026-10-01 Portefeuille-dashboard",
+  decorators: [
+    metVoorbeeldlabel(
+      "Fondsen en bedragen zijn verzonnen; dit is niet je echte portefeuille. Een proef om te zien hoe de agent een dashboard ontwerpt, in drie richtingen.",
+    ),
+  ],
   parameters: {
     layout: "fullscreen",
     docs: {
