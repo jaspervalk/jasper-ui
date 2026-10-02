@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";var t,n,r;function i(){return(i=e((()=>{t=`@container/chart-center size-full min-w-0`,n=`font-bold tabular-nums leading-none text-[clamp(0.75rem,22cqw,1.875rem)]`,r=`max-w-full truncate leading-tight text-[clamp(0.75rem,9cqw,0.875rem)]`})))()}export{i,r as n,n as r,t};

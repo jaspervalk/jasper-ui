@@ -1,0 +1,145 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Bibliotheek/Overzicht" />
+
+# Bibliotheek
+
+De bibliotheek toont onderdelen die je aan een dashboard of site kunt toevoegen, elk met verzonnen voorbeelddata en in
+jouw huisstijlen (kies bovenin neutraal of cockpit, licht of donker). Zeg welke je in een dashboard wilt, of welke in
+het register `@jasper` moet, dan komt hij daar.
+
+## Grafieken van Bklit UI
+
+<table>
+  <thead>
+    <tr>
+      <th>Onderdeel</th>
+      <th>Wat het laat zien</th>
+      <th>Waarvoor</th>
+      <th>Staat al in</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[Lijngrafiek](?path=/story/bibliotheek-bklit-lijngrafiek--twee-lijnen)</td>
+      <td>Een waarde door de tijd</td>
+      <td>Prijs, koers, waarde van een fonds</td>
+      <td>Cockpit, werkbank (lab: portefeuille)</td>
+    </tr>
+    <tr>
+      <td>[Vlakgrafiek](?path=/story/bibliotheek-bklit-vlakgrafiek--een-reeks)</td>
+      <td>Een hoeveelheid door de tijd, ingekleurd</td>
+      <td>Opwek per week, bezoekers per dag</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Staafgrafiek](?path=/story/bibliotheek-bklit-staafgrafiek--gegroepeerd)</td>
+      <td>Een getal per categorie of maand</td>
+      <td>Dividend per maand, bezoekers per podium. **Niet voor min-waarden**</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Gecombineerde grafiek](?path=/story/bibliotheek-bklit-gecombineerde-grafiek--staven-en-lijn)</td>
+      <td>Staven en een lijn samen</td>
+      <td>Verbruik tegen vorig jaar, inleg tegen doel</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Spreidingsgrafiek](?path=/story/bibliotheek-bklit-spreidingsgrafiek--twee-groepen)</td>
+      <td>Losse metingen als stippen</td>
+      <td>Laadsessies, transacties</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Koersgrafiek](?path=/story/bibliotheek-bklit-koersgrafiek-candlestick--weekkoersen)</td>
+      <td>Open, slot, hoog en laag per periode</td>
+      <td>Koers van een fonds per week</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Live lijngrafiek](?path=/story/bibliotheek-bklit-live-lijngrafiek--stroommeter)</td>
+      <td>Een meting die nu binnenkomt</td>
+      <td>Stroomverbruik in watt, bezoekers nu</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Taartgrafiek](?path=/story/bibliotheek-bklit-taartgrafiek--verdeling)</td>
+      <td>Delen van een geheel, ook als donut</td>
+      <td>Beleggingen naar soort, stroom per apparaat</td>
+      <td>Cockpit, werkbank (lab: portefeuille, *Rustig*)</td>
+    </tr>
+    <tr>
+      <td>[Ringgrafiek](?path=/story/bibliotheek-bklit-ringgrafiek--spaardoelen)</td>
+      <td>Voortgang naar een doel, per ring</td>
+      <td>Spaardoelen, kaartverkoop tegen capaciteit</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Zonnestraal](?path=/story/bibliotheek-bklit-zonnestraal-sunburst--portefeuille)</td>
+      <td>Een verdeling in twee lagen</td>
+      <td>Portefeuille naar soort en fonds</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Radargrafiek](?path=/story/bibliotheek-bklit-radargrafiek--twee-fondsen)</td>
+      <td>Een profiel op vijf punten</td>
+      <td>Twee fondsen of locaties vergelijken</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Meter](?path=/story/bibliotheek-bklit-meter--boog)</td>
+      <td>Eén percentage als boog of balk</td>
+      <td>Zelf gebruikte zonnestroom, verkochte kaarten</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Trechter](?path=/story/bibliotheek-bklit-trechter--kaartverkoop)</td>
+      <td>Hoeveel er na elke stap overblijft</td>
+      <td>Van bezoek naar bestelling</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Stroomdiagram](?path=/story/bibliotheek-bklit-stroomdiagram-sankey--stroom)</td>
+      <td>Stromen van bron naar bestemming</td>
+      <td>Stroom van zon en net naar apparaten</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Warmtekaart](?path=/story/bibliotheek-bklit-warmtekaart-kalender--zonnestroom)</td>
+      <td>Een kalender met een vakje per dag</td>
+      <td>Opwek per dag, dagen met activiteit</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Kaart](?path=/story/bibliotheek-bklit-kaart-choropleth--bezoekers-per-land)</td>
+      <td>Landen gekleurd naar een getal</td>
+      <td>Bezoekers per land</td>
+      <td>Werkbank</td>
+    </tr>
+    <tr>
+      <td>[Kerncijfer](?path=/story/bibliotheek-bklit-kerncijfer-stat-flow--met-periode)</td>
+      <td>Eén groot getal dat naar een nieuwe waarde rolt</td>
+      <td>Kerncijfer boven een grafiek</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+    <tr>
+      <td>[Legenda](?path=/story/bibliotheek-bklit-legenda--budget)</td>
+      <td>Kleur, naam, getal en een balk per regel</td>
+      <td>Sleutel naast een grafiek, budget per post</td>
+      <td>Cockpit, werkbank</td>
+    </tr>
+  </tbody>
+</table>
+
+*Cockpit* betekent: geïnstalleerd in `invest_helper/web`, nog op geen pagina in gebruik. *Werkbank*: hier te zien.
+In het register `@jasper` staan nog geen grafieken, alleen hun kleuren (`chart-thema`).
+
+## Goed om te weten
+
+- De staafgrafiek tekent waarden onder nul niet (Bklit-issue #234). Zie *Negatieve waarden (fout)*.
+- Alle grafieken reageren alleen op de muis en zijn voor schermlezers onzichtbaar. Zet de getallen er als tekst of
+  tabel naast.
+- De grafiekkleuren zijn in beide huisstijlen grijstinten. Een eigen kleur per huisstijl kan via `--chart-1` tot
+  `--chart-5`.
+- Bij elk onderdeel staat onder *Docs* wat het laat zien, waarvoor, de beperkingen en hoe je het toevoegt. Bklit UI,
+  MIT.

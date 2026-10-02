@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const docs = fileURLToPath(new URL("../docs", import.meta.url));
-const VERBODEN = /proeftuin|inklaretaal|themes\/lokaal/i;
+const VERBODEN = /proeftuin|lab-lokaal|inklaretaal|themes\/lokaal/i;
 const TEKST = /\.(html|js|mjs|cjs|css|json|map|txt|md|svg)$/;
 
 function* bestanden(map) {

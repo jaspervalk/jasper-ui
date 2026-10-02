@@ -1,9 +1,10 @@
 node_modules/
 .DS_Store
 
-# Alleen lokaal, nooit in git of in de Pages-build: de proeftuin (21st.dev verbiedt herdistributie) en
-# huisstijlen die niet openbaar zijn (inklaretaal).
+# Alleen lokaal, nooit in git of in de Pages-build: de proeftuin (21st.dev verbiedt herdistributie), het lab voor
+# echte bedrijven en echte data (lab-lokaal), en huisstijlen die niet openbaar zijn (inklaretaal).
 proeftuin/
+lab-lokaal/
 themes/lokaal/
 
 # Werkbestanden van Storybook, Vitest en Playwright

@@ -28,6 +28,9 @@ const tags = (huisstijl: string) => ({ include: ["test"], exclude: huisstijl ===
 
 export default defineConfig({
   test: {
+    // Zes projecten draaien tegelijk, elk met een eigen Chromium. De eerste story van een bestand met grafieken
+    // (Bklit, in bibliotheek/) laadt dan soms langer dan de standaard 15 s; daarna gaat het in milliseconden.
+    testTimeout: 30_000,
     projects: (binnenStorybook ? [{ huisstijl: "neutraal", theme: "licht" }] : combinaties).map(({ huisstijl, theme }) => ({
       extends: true,
       plugins: [

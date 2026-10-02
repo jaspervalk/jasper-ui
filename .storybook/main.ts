@@ -6,15 +6,18 @@ import tailwindcss from "@tailwindcss/vite";
 import type { Plugin } from "vite";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const proeftuin = join(root, "proeftuin");
 const lokaleThemas = join(root, "themes/lokaal");
 
-// Publiek = de build voor GitHub Pages. Dan nooit de proeftuin (21st.dev verbiedt herdistributie) en nooit de lokale
-// huisstijlen. Twee signalen, zodat één vergissing niet genoeg is; scripts/controleer-build.mjs controleert daarna.
+// Publiek = de build voor GitHub Pages. Dan nooit de lokale mappen en nooit de lokale huisstijlen. Twee signalen,
+// zodat één vergissing niet genoeg is; scripts/controleer-build.mjs controleert daarna.
 const publiek = process.env.WERKBANK_PUBLIEK === "1" || process.argv.includes("build");
 
-// Levert `virtual:werkbank-lokaal` (de lokale huisstijlen) en laat Tailwind de proeftuin scannen. Tailwind slaat
-// mappen uit .gitignore over, dus zonder deze @source krijgen klassen die alleen in de proeftuin staan geen CSS.
+// Mappen die alleen lokaal bestaan (gitignored): de proeftuin (21st.dev verbiedt herdistributie) en het lab voor
+// echte bedrijven en echte data. Alleen buiten de publieke build, en alleen als ze bestaan.
+const lokaleMappen = publiek ? [] : ["proeftuin", "lab-lokaal"].filter((m) => existsSync(join(root, m)));
+
+// Levert `virtual:werkbank-lokaal` (de lokale huisstijlen) en laat Tailwind de lokale mappen scannen. Tailwind slaat
+// mappen uit .gitignore over, dus zonder deze @source krijgen klassen die alleen daar staan geen CSS.
 function werkbankLokaal(): Plugin {
   const id = "virtual:werkbank-lokaal";
   return {
@@ -33,9 +36,8 @@ function werkbankLokaal(): Plugin {
       return `${imports.join("\n")}\nexport const lokaleHuisstijlen = ${JSON.stringify(namen)};\n`;
     },
     transform(code, bestand) {
-      if (publiek || !existsSync(proeftuin)) return;
-      if (!bestand.split("?")[0].endsWith("/src/styles/basis.css")) return;
-      return `${code}\n@source "../../proeftuin";\n`;
+      if (!lokaleMappen.length || !bestand.split("?")[0].endsWith("/src/styles/basis.css")) return;
+      return `${code}\n${lokaleMappen.map((m) => `@source "../../${m}";`).join("\n")}\n`;
     },
   };
 }
@@ -45,8 +47,10 @@ const config: StorybookConfig = {
   stories: [
     "../src/werkbank/*.mdx",
     "../catalogus/**/*.stories.@(ts|tsx)",
+    "../bibliotheek/**/*.mdx",
+    "../bibliotheek/**/*.stories.@(ts|tsx)",
     "../lab/**/*.stories.@(ts|tsx)",
-    ...(!publiek && existsSync(proeftuin) ? ["../proeftuin/**/*.stories.@(ts|tsx)"] : []),
+    ...lokaleMappen.map((m) => `../${m}/**/*.stories.@(ts|tsx)`),
   ],
   addons: [
     "@storybook/addon-docs",

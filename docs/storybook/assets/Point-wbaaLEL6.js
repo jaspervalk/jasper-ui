@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";var t;function n(){return(n=e((()=>{t=class{x=0;y=0;constructor(e){let{x:t=0,y:n=0}=e;this.x=t,this.y=n}value(){return{x:this.x,y:this.y}}toArray(){return[this.x,this.y]}}})))()}export{n,t};

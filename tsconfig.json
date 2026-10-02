@@ -15,5 +15,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "catalogus", "lab", "proeftuin", "themes", ".storybook", "vitest.config.ts"]
+  "include": ["src", "catalogus", "bibliotheek", "lab", "proeftuin", "themes", ".storybook", "vitest.config.ts"]
 }

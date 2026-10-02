@@ -57,6 +57,7 @@ Een [Storybook](https://storybook.js.org/) om UI te bekijken en te testen, openb
 | Map | Wat |
 | --- | --- |
 | `catalogus/` | Een story per onderdeel van het register. |
+| `bibliotheek/` | Wat je kunt toevoegen, te beginnen met alle Bklit-grafieken, met een overzicht om uit te kiezen. |
 | `lab/<datum>-<onderwerp>/` | Hele pagina's in twee of drie richtingen, met de prompts erbij en een story die ze naast elkaar zet. |
 | `src/werkbank/` | Hulpmiddelen van de werkbank: `Vergelijk`, `VergelijkVensters` (elke variant in een eigen venster, samen scrollen), het voorbeeldlabel, de zichtbaarheidscheck. |
 | `src/lib/beweging.ts` | GSAP voor landingspagina's: plugins, en animaties alleen als "beweging beperken" uit staat. |
@@ -72,9 +73,10 @@ Een winnaar kan een template in het register worden. Alles in het lab is verzonn
 Tests draaien met "beweging beperken" aan, zodat axe de eindtoestand ziet en tekst die op een animatie blijft wachten
 opvalt.
 
-Twee mappen zijn alleen lokaal en staan in `.gitignore`: `proeftuin/` (componenten van Bklit of 21st.dev uitproberen
-voordat ze een project in gaan; 21st.dev verbiedt herdistributie) en `themes/lokaal/` (huisstijlen die niet openbaar
-zijn). Ze verschijnen bij `npm run dev` en `npm test`, nooit in de build.
+Drie mappen zijn alleen lokaal en staan in `.gitignore`: `proeftuin/` (componenten van Bklit of 21st.dev uitproberen
+voordat ze een project in gaan; 21st.dev verbiedt herdistributie), `lab-lokaal/` (het lab voor echte bedrijven en
+echte cijfers) en `themes/lokaal/` (huisstijlen die niet openbaar zijn). Ze verschijnen bij `npm run dev` en
+`npm test`, nooit in de build.
 
 ## Herkomst
 

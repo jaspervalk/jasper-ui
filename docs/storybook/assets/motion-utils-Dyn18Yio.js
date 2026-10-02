@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{i as t,n}from"./animation-q2Yq9P5l.js";function r(e,t,r=n){return{...e??r,delay:t}}function i(){return(i=e((()=>{t()})))()}export{r as n,i as t};

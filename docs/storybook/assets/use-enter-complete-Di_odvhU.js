@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-Q1GcV6wX.js";function n(e){let[t,n]=(0,r.useState)(()=>e.get()>=1);return(0,r.useEffect)(()=>{if(e.get()>=1){n(!0);return}return e.on(`change`,e=>{e>=1&&n(!0)})},[e]),t}var r;function i(){return(i=e((()=>{r=t()})))()}export{n,i as t};

@@ -69,7 +69,7 @@ const preview: Preview = {
     options: {
       // Wat hier niet staat, komt erna op alfabet. Noem lokale mappen hier niet: dit bestand gaat mee in de build.
       // In elk lab-experiment staat Vergelijk bovenaan, daarna de varianten.
-      storySort: { order: ["Welkom", "Catalogus", "Lab", ["*", ["Vergelijk", "*"]]] },
+      storySort: { order: ["Welkom", "Catalogus", "Bibliotheek", "Lab", ["*", ["Vergelijk", "*"]]] },
     },
     // Docs-pagina's (zoals Welkom) volgen, net als het frame, de systeeminstelling.
     docs: { theme: window.matchMedia("(prefers-color-scheme: dark)").matches ? donker : licht },
