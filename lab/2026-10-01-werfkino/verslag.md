@@ -37,6 +37,15 @@ grote datumcijfers en het oplichtende programma; uit Redactioneel de prijs in de
 - De voorbeeldstrook van de werkbank kost 77 px op een telefoon en duwt de koopknop daar net onder de rand. In een
   template valt die strook weg.
 
-## Keuze van Jasper
+## Keuze van Jasper (2-10-2026)
 
-Nog open.
+**Nacht**, als template. Het werd `@jasper/landing-nacht` (`src/templates/landing-nacht/`), met drie verbeteringen
+ten opzichte van de variant hier (die blijft zoals de agent hem bouwde):
+
+- een vaste "Koop tickets" onderin op een telefoon, die wijkt zodra het ticketformulier in beeld is;
+- de manifestkop vóór de tekst (ook voor schermlezers en op een telefoon);
+- het programma als lijst die oplicht waar je bent (geleend van Affiche) in plaats van de horizontale baan die de
+  scroll overnam; de lijntekening per film bleef.
+
+Getoetst: in de werkbank (axe, zichtbaarheid, beelden en video) en in een vers Vite-project: `shadcn add` zette de zes
+bestanden op hun plek, installeerde GSAP en het lettertype, en typecheck en build slaagden.

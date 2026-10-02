@@ -1,0 +1,101 @@
+/* Template landing-nacht (uit het lab Werfkino, variant Nacht): zwart, staal en één natriumoranje lamp.
+   Vervang de waarden hieronder door die van je eigen merk, en controleer het contrast opnieuw.
+   Alles hangt aan de eigen wortel, zodat niets naar andere stories lekt. Eén kleurschema, los van licht en donker
+   van de werkbank. Contrast (WCAG): op nacht tekst 15,6:1, gedempt 7,1:1, oranje 9,2:1; op staal tekst 14,0:1,
+   gedempt 6,4:1; nacht op oranje 9,2:1. */
+[data-merk="landing-nacht"] {
+  --merk-nacht: #0d0d0c;
+  --merk-staal: #1a1a18;
+  --merk-lijn: #34322d;
+  --merk-lijn-licht: #57534c;
+  --merk-tekst: #ebe6dc;
+  --merk-gedempt: #a29c92;
+  --merk-oranje: #ff9a3c;
+  --merk-oranje-heet: #ffb468;
+  --merk-oranje-diep: #b85a1a;
+
+  font-family: "Archivo Variable", system-ui, sans-serif;
+  background: var(--merk-nacht);
+  color: var(--merk-tekst);
+  color-scheme: dark;
+}
+
+/* Breedte-as van Archivo: smal en zwaar voor koppen, half smal voor de statementzin. */
+[data-merk="landing-nacht"] .smal {
+  font-stretch: 62%;
+}
+[data-merk="landing-nacht"] .half {
+  font-stretch: 75%;
+}
+
+/* Het licht in het doek, de enige gradient op de pagina: een natriumlamp op het doek, met boven- en onderrand in het
+   donker van de hal. Zo staan navigatie en statementzin ook bij een open doek op nacht. De titel (nacht) blijft binnen
+   de heldere band: minstens 4:1 tegen het donkerste oranje eronder. */
+[data-merk="landing-nacht"] .doek-licht {
+  background:
+    linear-gradient(
+      to bottom,
+      var(--merk-nacht) 0%,
+      transparent 20%,
+      transparent 50%,
+      var(--merk-nacht) 62%
+    ),
+    radial-gradient(
+      ellipse 150% 24% at 50% 40%,
+      var(--merk-oranje-heet) 0%,
+      var(--merk-oranje) 48%,
+      var(--merk-oranje-diep) 82%,
+      #2a160a 100%
+    ),
+    var(--merk-nacht);
+}
+
+@media (min-width: 48rem) {
+  [data-merk="landing-nacht"] .doek-licht {
+    background:
+      linear-gradient(
+        to bottom,
+        var(--merk-nacht) 0%,
+        transparent 15%,
+        transparent 56%,
+        var(--merk-nacht) 68%
+      ),
+      radial-gradient(
+        ellipse 74% 34% at 50% 40%,
+        var(--merk-oranje-heet) 0%,
+        var(--merk-oranje) 46%,
+        var(--merk-oranje-diep) 82%,
+        #2a160a 100%
+      ),
+      var(--merk-nacht);
+  }
+}
+
+/* Het programma licht op waar je bent. De kenmerken zet ScrollTrigger, en alleen als beweging mag; zonder staat alles
+   in volle kleur. Alleen kleur en de helderheid van de tekening veranderen, nooit de maat: zo springt er niets.
+   Teruggetreden tekst blijft leesbaar: gedempt op staal haalt 6,4:1. */
+[data-merk="landing-nacht"] .film :is(.film-titel, .film-tekst) {
+  transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-merk="landing-nacht"] .film .film-beeld {
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-merk="landing-nacht"] [data-oplichten] .film:not([data-actief]) :is(.film-titel, .film-tekst) {
+  color: var(--merk-gedempt);
+}
+[data-merk="landing-nacht"] [data-oplichten] .film:not([data-actief]) .film-beeld {
+  opacity: 0.45;
+}
+[data-merk="landing-nacht"] [data-oplichten] .film[data-actief] .film-titel {
+  color: var(--merk-oranje);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-merk="landing-nacht"] .film :is(.film-titel, .film-tekst, .film-beeld) {
+    transition: none;
+  }
+}
+
+/* Lijnwerk (stills en de tekening van de hal) blijft even dun, hoe groot het ook geschaald wordt. */
+[data-merk="landing-nacht"] .lijnwerk * {
+  vector-effect: non-scaling-stroke;
+}

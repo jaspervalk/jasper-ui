@@ -89,6 +89,55 @@
           "chart-scale-pattern-color": "oklch(0.145 0 0)"
         }
       }
+    },
+    {
+      "name": "beweging",
+      "type": "registry:lib",
+      "title": "Beweging met GSAP",
+      "description": "GSAP met ScrollTrigger, SplitText en Flip, één keer geregistreerd, en de hook useBeweging: animaties alleen als 'beweging beperken' uit staat, en opgeruimd bij unmount.",
+      "dependencies": ["gsap@^3.15.0", "@gsap/react@^2.1.2"],
+      "files": [
+        {
+          "path": "src/lib/beweging.ts",
+          "type": "registry:lib",
+          "target": "@lib/beweging.ts"
+        }
+      ]
+    },
+    {
+      "name": "landing-nacht",
+      "type": "registry:block",
+      "title": "Landingspagina Nacht",
+      "description": "Donkere landingspagina (React, Tailwind 4) met een doek dat opengaat bij scrollen en een programma dat oplicht waar je bent. Teksten in inhoud.ts, kleuren en lettertype in merk.css. Uit het lab Werfkino.",
+      "dependencies": ["@fontsource-variable/archivo"],
+      "registryDependencies": ["https://jaspervalk.github.io/jasper-ui/r/beweging.json"],
+      "files": [
+        {
+          "path": "src/templates/landing-nacht/LandingNacht.tsx",
+          "type": "registry:component",
+          "target": "@components/templates/landing-nacht/LandingNacht.tsx"
+        },
+        {
+          "path": "src/templates/landing-nacht/Still.tsx",
+          "type": "registry:component",
+          "target": "@components/templates/landing-nacht/Still.tsx"
+        },
+        {
+          "path": "src/templates/landing-nacht/HalTekening.tsx",
+          "type": "registry:component",
+          "target": "@components/templates/landing-nacht/HalTekening.tsx"
+        },
+        {
+          "path": "src/templates/landing-nacht/inhoud.ts",
+          "type": "registry:component",
+          "target": "@components/templates/landing-nacht/inhoud.ts"
+        },
+        {
+          "path": "src/templates/landing-nacht/merk.css",
+          "type": "registry:component",
+          "target": "@components/templates/landing-nacht/merk.css"
+        }
+      ]
     }
   ]
 }

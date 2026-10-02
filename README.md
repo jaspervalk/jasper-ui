@@ -26,6 +26,8 @@ Een nieuwere versie ophalen: dezelfde opdracht nog eens, en kies bij een bestaan
 | Naam | Soort | Wat |
 | --- | --- | --- |
 | `chart-thema` | thema | De kleuren van de [Bklit-grafieken](https://github.com/bklit/bklit-ui), licht en donker, met een kloppende koppeling naar Tailwind 4. Het register van Bklit zelf schrijft `var(----chart-…)` met vier streepjes, waardoor de kleuren leeg blijven. Voeg dit toe na een Bklit-grafiek. |
+| `beweging` | lib | GSAP (ScrollTrigger, SplitText, Flip) met de hook `useBeweging`: animaties alleen als "beweging beperken" uit staat, en opgeruimd bij unmount. |
+| `landing-nacht` | template | Donkere landingspagina met een doek dat opengaat bij scrollen en een programma dat oplicht waar je bent. Komt in `components/templates/landing-nacht/`; vervang daar `inhoud.ts` en `merk.css` door je eigen teksten en kleuren. Neemt `beweging` mee. Uit het lab Werfkino. |
 
 Donkere kleuren komen, zoals altijd bij shadcn, onder `.dark`. Schakelt een project met iets anders (de cockpit van het
 beleggingsregister gebruikt `data-theme="dark"`), zet het blok dan onder die selector.

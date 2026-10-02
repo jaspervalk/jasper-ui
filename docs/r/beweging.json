@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "beweging",
+  "title": "Beweging met GSAP",
+  "description": "GSAP met ScrollTrigger, SplitText en Flip, één keer geregistreerd, en de hook useBeweging: animaties alleen als 'beweging beperken' uit staat, en opgeruimd bij unmount.",
+  "dependencies": [
+    "gsap@^3.15.0",
+    "@gsap/react@^2.1.2"
+  ],
+  "files": [
+    {
+      "path": "src/lib/beweging.ts",
+      "content": "import { useGSAP } from \"@gsap/react\";\nimport { gsap } from \"gsap\";\nimport { Flip } from \"gsap/Flip\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { SplitText } from \"gsap/SplitText\";\nimport type { RefObject } from \"react\";\n\n// Eén plek voor GSAP in de werkbank: plugins registreren en animaties alleen opzetten als beweging mag. Globale\n// instellingen (gsap.defaults, ScrollTrigger.config) alleen hier, nooit in een variant: die blijven anders tussen\n// stories hangen.\ngsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, Flip);\n\nexport { Flip, gsap, ScrollTrigger, SplitText };\n\n/** Beweging mag. Bij `prefers-reduced-motion: reduce` blijft alles in de eindtoestand. */\nexport const MAG_BEWEGEN = \"(prefers-reduced-motion: no-preference)\";\n\n/** Voor handlers buiten `useBeweging` (een klik met Flip): bij nee meteen de eindtoestand zetten. */\nexport function magBewegen() {\n  return typeof window !== \"undefined\" && window.matchMedia(MAG_BEWEGEN).matches;\n}\n\n/**\n * Zet animaties op voor een component. `opzet` draait alleen als beweging mag; een klikhandler maak je veilig met de\n * tweede parameter (`contextSafe`). Bij unmount, of als `dependencies` veranderen, draait useGSAP alles terug:\n * tweens, ScrollTriggers en SplitText. Daarom `revertOnUpdate`, anders ontstaan dubbele ScrollTriggers.\n */\nexport function useBeweging(\n  opzet: gsap.ContextFunc,\n  { scope, dependencies = [] }: { scope: RefObject<HTMLElement | null>; dependencies?: unknown[] },\n) {\n  return useGSAP(\n    () => {\n      gsap.matchMedia().add(MAG_BEWEGEN, opzet);\n      // De story wordt pas na `load` gemount; lettertypen kunnen daarna nog binnenkomen en de maten verschuiven.\n      void document.fonts?.ready.then(() => ScrollTrigger.refresh());\n    },\n    { scope, dependencies, revertOnUpdate: true },\n  );\n}\n",
+      "type": "registry:lib",
+      "target": "@lib/beweging.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

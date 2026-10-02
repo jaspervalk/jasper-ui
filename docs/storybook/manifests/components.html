@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">6/6 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">6/6 infos</a><span class="filter-pill ok" aria-disabled="true">10 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">7/7 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">7/7 infos</a><span class="filter-pill ok" aria-disabled="true">11 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">1 doc ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.4s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.7s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -1037,7 +1037,7 @@ import registry from &quot;../registry.json&quot;;
 
 // De waarden komen rechtstreeks uit registry.json, zodat de catalogus altijd toont wat het register uitlevert.
 const item = registry.items.find((i) =&gt; i.name === &quot;chart-thema&quot;);
-if (!item) throw new Error(&quot;chart-thema ontbreekt in registry.json&quot;);
+if (!item?.cssVars) throw new Error(&quot;chart-thema (met cssVars) ontbreekt in registry.json&quot;);
 const licht: Record&lt;string, string&gt; = item.cssVars.light;
 const donker: Record&lt;string, string&gt; = item.cssVars.dark;
 
@@ -1207,6 +1207,125 @@ export const Grafiek: Story = {
   </div>
 </article>
 <article
+  id="catalogus-landing-nacht"
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
+  aria-label="landing-nacht">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> landing-nacht</h2>
+      <div class="badges">
+        <label for="c-3-catalogus-landing-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-3-catalogus-landing-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-3-catalogus-landing-nacht-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./catalogus/landing-nacht.stories.tsx">catalogus-landing-nacht · ./catalogus/landing-nacht.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-3-catalogus-landing-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-3-catalogus-landing-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-3-catalogus-landing-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+  4 | import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+  5 |
+&gt; 6 | const meta = {
+    | ^
+  7 |   title: &quot;Catalogus/landing-nacht&quot;,
+  8 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  9 |   decorators: [
+
+./catalogus/landing-nacht.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { LandingNacht } from &quot;@/templates/landing-nacht/LandingNacht&quot;;
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+const meta = {
+  title: &quot;Catalogus/landing-nacht&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(
+      &quot;Template met de inhoud van een verzonnen festival. Na het installeren vervang je inhoud.ts en merk.css door die van je eigen merk.&quot;,
+    ),
+  ],
+  parameters: {
+    layout: &quot;fullscreen&quot;,
+    docs: {
+      description: {
+        component:
+          &quot;Donkere landingspagina met een doek dat opengaat bij scrollen en een programma dat oplicht waar je bent. Uit het lab Werfkino (variant Nacht). Installeren: `npx shadcn@latest add @jasper/landing-nacht`.&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+
+export const Pagina: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;LandingNacht /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { LandingNacht } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Pagina</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Pagina = () =&gt; &lt;LandingNacht /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
   id="lab-2026-10-01-werfkino-nacht"
   class="card 
   has-error
@@ -1221,9 +1340,9 @@ export const Grafiek: Story = {
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Nacht</h2>
       <div class="badges">
-        <label for="c-3-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
-        <label for="c-3-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-4-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-4-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-4-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -1235,9 +1354,9 @@ export const Grafiek: Story = {
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-3-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-3-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-3-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-4-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-4-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-4-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -1331,9 +1450,9 @@ export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina 
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Redactioneel</h2>
       <div class="badges">
-        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
-        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
-        <label for="c-4-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-5-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
+        <label for="c-5-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
+        <label for="c-5-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -1345,9 +1464,9 @@ export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina 
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-4-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-5-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-5-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-5-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -1441,9 +1560,9 @@ export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Vergelijk</h2>
       <div class="badges">
-        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
-        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
-        <label for="c-5-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-6-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
+        <label for="c-6-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
+        <label for="c-6-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -1455,9 +1574,9 @@ export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-5-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-6-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-6-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-6-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -1586,7 +1705,7 @@ export const Vergelijk: StoryObj&lt;typeof meta&gt; = {
           <label for="no-component-found-toggle" class="group-header">
             <span class="caret">▸</span>
             <span class="group-title">No component found</span>
-            <span class="group-count">6</span>
+            <span class="group-count">7</span>
           </label>
           <div class="group-cards">
 <article
@@ -1990,7 +2109,7 @@ import registry from &quot;../registry.json&quot;;
 
 // De waarden komen rechtstreeks uit registry.json, zodat de catalogus altijd toont wat het register uitlevert.
 const item = registry.items.find((i) =&gt; i.name === &quot;chart-thema&quot;);
-if (!item) throw new Error(&quot;chart-thema ontbreekt in registry.json&quot;);
+if (!item?.cssVars) throw new Error(&quot;chart-thema (met cssVars) ontbreekt in registry.json&quot;);
 const licht: Record&lt;string, string&gt; = item.cssVars.light;
 const donker: Record&lt;string, string&gt; = item.cssVars.dark;
 
@@ -2169,14 +2288,133 @@ export const Grafiek: Story = {
   
   no-doc-error"
   role="listitem"
+  aria-label="landing-nacht">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-err"></span> landing-nacht</h2>
+      <div class="badges">
+        <label for="c-error-3-catalogus-landing-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-3-catalogus-landing-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-3-catalogus-landing-nacht-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./catalogus/landing-nacht.stories.tsx">catalogus-landing-nacht · ./catalogus/landing-nacht.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  <input id="c-error-3-catalogus-landing-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-3-catalogus-landing-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-3-catalogus-landing-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  
+
+  <div class="panels">
+    
+        <div class="panel panel-err">
+          
+    <div class="note err">
+      <div class="note-title">API error</div>
+      <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
+  4 | import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+  5 |
+&gt; 6 | const meta = {
+    | ^
+  7 |   title: &quot;Catalogus/landing-nacht&quot;,
+  8 |   tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  9 |   decorators: [
+
+./catalogus/landing-nacht.stories.tsx:
+import type { Meta, StoryObj } from &quot;@storybook/react-vite&quot;;
+
+import { LandingNacht } from &quot;@/templates/landing-nacht/LandingNacht&quot;;
+import { metVoorbeeldlabel } from &quot;@/werkbank/Voorbeeld&quot;;
+
+const meta = {
+  title: &quot;Catalogus/landing-nacht&quot;,
+  tags: [&quot;merk&quot;, &quot;beweging&quot;],
+  decorators: [
+    metVoorbeeldlabel(
+      &quot;Template met de inhoud van een verzonnen festival. Na het installeren vervang je inhoud.ts en merk.css door die van je eigen merk.&quot;,
+    ),
+  ],
+  parameters: {
+    layout: &quot;fullscreen&quot;,
+    docs: {
+      description: {
+        component:
+          &quot;Donkere landingspagina met een doek dat opengaat bij scrollen en een programma dat oplicht waar je bent. Uit het lab Werfkino (variant Nacht). Installeren: `npx shadcn@latest add @jasper/landing-nacht`.&quot;,
+      },
+    },
+  },
+} satisfies Meta;
+
+export default meta;
+
+export const Pagina: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;LandingNacht /&gt; };
+</code></pre></div>
+    </div>
+        </div>
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { LandingNacht } from 'jasper-ui';</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Pagina</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Pagina = () =&gt; &lt;LandingNacht /&gt;;</code></pre>
+              
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  
+  class="card 
+  has-error
+  has-info
+  no-story-error
+  no-story-warning
+  
+  no-doc-error"
+  role="listitem"
   aria-label="Nacht">
   <div class="head">
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Nacht</h2>
       <div class="badges">
-        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
-        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
-        <label for="c-error-3-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-error-4-lab-2026-10-01-werfkino-nacht-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-4-lab-2026-10-01-werfkino-nacht-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-4-lab-2026-10-01-werfkino-nacht-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -2188,9 +2426,9 @@ export const Grafiek: Story = {
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-error-3-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-error-4-lab-2026-10-01-werfkino-nacht-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-4-lab-2026-10-01-werfkino-nacht-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-4-lab-2026-10-01-werfkino-nacht-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -2284,9 +2522,9 @@ export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina 
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Redactioneel</h2>
       <div class="badges">
-        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
-        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
-        <label for="c-error-4-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-error-5-lab-2026-10-01-werfkino-redactioneel-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-5-lab-2026-10-01-werfkino-redactioneel-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-5-lab-2026-10-01-werfkino-redactioneel-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -2298,9 +2536,9 @@ export const Nacht: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;Pagina 
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-error-4-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-error-5-lab-2026-10-01-werfkino-redactioneel-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-5-lab-2026-10-01-werfkino-redactioneel-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-5-lab-2026-10-01-werfkino-redactioneel-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   
@@ -2394,9 +2632,9 @@ export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;
     <div class="title">
       <h2><span class="status-dot dot-err"></span> Vergelijk</h2>
       <div class="badges">
-        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
-        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
-        <label for="c-error-5-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-error-6-lab-2026-10-01-werfkino-vergelijk-err" class="badge err as-toggle">API error</label>
+        <label for="c-error-6-lab-2026-10-01-werfkino-vergelijk-info" class="badge info as-toggle">1 info</label>
+        <label for="c-error-6-lab-2026-10-01-werfkino-vergelijk-stories" class="badge ok as-toggle">1 story</label>
         
         
       </div>
@@ -2408,9 +2646,9 @@ export const Redactioneel: StoryObj&lt;typeof meta&gt; = { render: () =&gt; &lt;
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
-  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-error-5-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-error-6-lab-2026-10-01-werfkino-vergelijk-err" class="tg tg-err" type="checkbox" hidden />
+  <input id="c-error-6-lab-2026-10-01-werfkino-vergelijk-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-error-6-lab-2026-10-01-werfkino-vergelijk-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
   

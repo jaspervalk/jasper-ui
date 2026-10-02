@@ -11,7 +11,7 @@ import registry from "../registry.json";
 
 // De waarden komen rechtstreeks uit registry.json, zodat de catalogus altijd toont wat het register uitlevert.
 const item = registry.items.find((i) => i.name === "chart-thema");
-if (!item) throw new Error("chart-thema ontbreekt in registry.json");
+if (!item?.cssVars) throw new Error("chart-thema (met cssVars) ontbreekt in registry.json");
 const licht: Record<string, string> = item.cssVars.light;
 const donker: Record<string, string> = item.cssVars.dark;
 
