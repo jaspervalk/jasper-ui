@@ -45,6 +45,22 @@
   --font-tekst: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-cijfers: "JetBrains Mono Variable", ui-monospace, monospace;
   --font-kop: var(--font-tekst);
+
+  /* Grafieken: één petrolreeks, gemengd (oklab) uit het accent en de kaart: 100, 72, 50, 32 en 18 %. Alleen de eerste
+     twee zijn sterk genoeg voor lijnen (6,1 en 3,4:1 op wit); de rest is voor vlakken. De schaal (warmtekaart, kaart)
+     loopt van bijna kaart naar het accent. Jasper koos petrol boven grijs, 2-10-2026. */
+  --chart-1: #046c7f;
+  --chart-2: #5d94a2;
+  --chart-3: #8eb4be;
+  --chart-4: #b6ced5;
+  --chart-5: #d6e3e7;
+  --chart-crosshair: #046c7f;
+  --chart-scale-01: #e8f0f2;
+  --chart-scale-02: #bfd4da;
+  --chart-scale-03: #93b7c0;
+  --chart-scale-04: #5d94a2;
+  --chart-scale-05: #046c7f;
+  --chart-scale-pattern-color: #f3f6fa;
 }
 
 :root[data-huisstijl="cockpit"].dark {
@@ -82,4 +98,18 @@
   --primary-soft: #122529;
   --warning-soft: #272117;
   --destructive-soft: #2a1c1c;
+
+  /* Dezelfde petrolreeks op de donkere kaart: 7,4 en 4,2:1 voor de eerste twee. */
+  --chart-1: #5eb3c2;
+  --chart-2: #488390;
+  --chart-3: #38606a;
+  --chart-4: #2a444d;
+  --chart-5: #203038;
+  --chart-crosshair: #5eb3c2;
+  --chart-scale-01: #1d2b32;
+  --chart-scale-02: #2a444d;
+  --chart-scale-03: #39636d;
+  --chart-scale-04: #4b8a97;
+  --chart-scale-05: #5eb3c2;
+  --chart-scale-pattern-color: #13181e;
 }

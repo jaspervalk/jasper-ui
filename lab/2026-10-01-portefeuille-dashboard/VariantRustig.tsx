@@ -23,11 +23,11 @@ import {
 } from "./voorbeelddata";
 
 // Verdeling als twee ringen om elkaar heen: buiten nu, binnen het doel. Zo zie je in één blik welke soort groter of
-// kleiner is dan bedoeld. Vier grijstinten, gemengd uit de tekst- en achtergrondkleur van de huisstijl: geen eigen
-// kleur per soort (die zou niets betekenen) en in donker geen fel wit (--chart-1 is daar wit en trekt dan meer
-// aandacht dan het kerncijfer). Dezelfde tint staat als stip voor de soort in de tabel. De getallen staan in de
-// tabel; de ringen zijn aria-hidden.
-const KLEUREN = [80, 60, 42, 26].map((p) => `color-mix(in oklab, var(--foreground) ${p}%, var(--background))`);
+// kleiner is dan bedoeld. Vier tinten van één kleur, gemengd uit het accent en de achtergrond van de huisstijl: petrol
+// in de cockpit, grijs in neutraal. Geen eigen kleur per soort (die zou niets betekenen) en in donker geen fel wit
+// (--chart-1 is in neutraal donker wit en trekt dan meer aandacht dan het kerncijfer). Dezelfde tint staat als stip
+// voor de soort in de tabel. De getallen staan in de tabel; de ringen zijn aria-hidden.
+const KLEUREN = [80, 60, 42, 26].map((p) => `color-mix(in oklab, var(--primary) ${p}%, var(--background))`);
 const ringNu = verdeling.map((v, i) => ({ label: v.soort, value: v.nu, color: KLEUREN[i] }));
 const ringDoel = verdeling.map((v, i) => ({ label: v.soort, value: v.doel, color: KLEUREN[i] }));
 
